@@ -1,77 +1,98 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
-export default function AlumnoForm() {
+interface Asistencia {
+  id: number;
+  fecha: string;
+  instructor: string;
+}
 
-const [formData, setFormData] = useState({
-    nombre:'' ,
-            apellido:'',
-            fechaNacimiento:'',
-            fechaInicio:'',
-            graduacionActual:'',             
-            fechaGradActual:'',
-            email:'',
-            telefono:'',
-            direccion:'',
-            dni:'',
-            passwordHash:'',
-            foto:'',
-  });
-  
+interface Alumno {
+  id: number;
+  nombre: string;
+  apellido: string;
+  fechaNacimiento: string;
+  fechaInicio: string;
+  graduacionActual: string;
+  fechaGradActual: string;
+  email: string;
+  telefono: string;
+  direccion: string;
+  dni: string;
+  passwordHash: string;
+  foto: string;
+  asistencia: Asistencia[];
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+export default function AlumnoList() {
+  const [alumnos, setAlumnos] = useState<Alumno[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-        console.log(formData);
-        const response = await fetch('/api/alumno/createal', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
-      
-      if (response.ok) {
-        alert('Alumno creado con éxito');
-        setFormData({
-            nombre:'' ,
-            apellido:'',
-            fechaNacimiento:'',
-            fechaInicio:'',
-            graduacionActual:'1er Dan',             
-            fechaGradActual:'',
-            email:'',
-            telefono:'',
-            direccion:'',
-            dni:'',
-            passwordHash:'',
-            foto:'',
-        });
-      } else {
-        alert('Error al crear el alumno');
+  useEffect(() => {
+    const fetchAlumnos = async () => {
+      try {
+        const response = await fetch('/api/alumno/alumnos');
+        const data = await response.json();
+        setAlumnos(data);
+      } catch (error) {
+        console.error('Error fetching alumnos:', error);
       }
-    } catch (error) {
-      alert('Hubo un problema con la solicitud');
+    };
+    fetchAlumnos();
+  }, []);
+
+  const handleSwipe = (direction: string) => {
+    if (direction === 'left' && currentIndex < alumnos.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else if (direction === 'right' && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleSwipe('left'),
+    onSwipedRight: () => handleSwipe('right'),
+    trackMouse: true,
+  });
+
+  if (alumnos.length === 0) {
+    return <p className="text-center mt-10">Cargando alumnos...</p>;
+  }
+
+  const selectedAlumno = alumnos[currentIndex];
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required />
-      <input name="apellido" placeholder="Apellido" value={formData.apellido} onChange={handleChange} required />
-      <input name="fechaNacimiento" type="date" value={formData.fechaNacimiento} onChange={handleChange} required />
-      <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-      <input name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} required />
-      <input name="direccion" placeholder="Dirección" value={formData.direccion} onChange={handleChange} required />
-      <input name="dni" placeholder="DNI" value={formData.dni} onChange={handleChange} required />
-      <input name="foto" placeholder="URL de la foto" value={formData.foto} onChange={handleChange} />
-      <input name="passwordHash" type="password" placeholder="Contraseña" value={formData.passwordHash} onChange={handleChange} required />
-      <input name="fechaInicio" type="date" value={formData.fechaInicio} onChange={handleChange} required />
-      <input name="fechaGradActual" type="date" value={formData.fechaGradActual} onChange={handleChange} required />
-      <button type="submit">Agregar Alumno</button>
-    </form>
+    <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center">
+      <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
+        <img src={selectedAlumno.foto} alt="Foto del alumno" className="mb-4 w-32 h-32 rounded-full mx-auto" />
+        <h2 className="text-2xl font-bold mb-2">
+          {selectedAlumno.nombre} {selectedAlumno.apellido}
+        </h2>
+        <p><strong>DNI:</strong> {selectedAlumno.dni}</p>
+        <p><strong>Email:</strong> {selectedAlumno.email}</p>
+        <p><strong>Teléfono:</strong> {selectedAlumno.telefono}</p>
+        <p><strong>Dirección:</strong> {selectedAlumno.direccion}</p>
+        <p><strong>Fecha de Nacimiento:</strong> {selectedAlumno.fechaNacimiento}</p>
+        <p><strong>Fecha de Inicio:</strong> {selectedAlumno.fechaInicio}</p>
+        <p><strong>Graduación Actual:</strong> {selectedAlumno.graduacionActual}</p>
+      </div>
+      <div className="mt-4 flex justify-between w-full max-w-sm">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          onClick={() => handleSwipe('right')}
+          disabled={currentIndex === 0}
+        >
+          Anterior
+        </button>
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          onClick={() => handleSwipe('left')}
+          disabled={currentIndex === alumnos.length - 1}
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
   );
 }
