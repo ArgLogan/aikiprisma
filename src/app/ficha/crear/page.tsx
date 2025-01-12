@@ -57,7 +57,7 @@ export default function AlumnoForm() {
         alert('Error al crear el alumno');
       }
     } catch (error) {
-      alert('Hubo un problema con la solicitud');
+      alert(`Hubo un problema con la solicitud: ${error}`);
     }
   };
 

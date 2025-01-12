@@ -22,7 +22,7 @@ export default function ClasesForm() {
         const data = await response.json();
         setAlumnos(data);
       } catch (error) {
-        alert('Error al cargar la lista de alumnos');
+        alert(`Error al cargar la lista de alumnos, ${error}`);
       }
     };
     fetchAlumnos();
@@ -63,7 +63,7 @@ export default function ClasesForm() {
         alert('Error al crear la clase');
       }
     } catch (error) {
-      alert('Hubo un problema con la solicitud');
+      alert(`Hubo un problema con la solicitud: ${error}`);
     }
   };
 
