@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
+import Image from 'next/image';
 
 interface Asistencia {
   id: number;
@@ -65,7 +66,12 @@ export default function AlumnoList() {
   return (
     <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
-        <img src={selectedAlumno.foto} alt="Foto del alumno" className="mb-4 w-32 h-32 rounded-full mx-auto" />
+        <Image className="mb-4 w-32 h-32 rounded-full mx-auto"
+          src={selectedAlumno.foto} 
+          alt="Foto del alumno"  
+          width={128}
+          height={128}
+        />
         <h2 className="text-2xl font-bold mb-2">
           {selectedAlumno.nombre} {selectedAlumno.apellido}
         </h2>
