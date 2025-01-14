@@ -9,11 +9,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'PUT') {
     try {
       const data = req.body;
+     
       console.log('data:', data);
       const alumno = await prisma.alumno.update({
         where: { id: Number(id) },
-        data,
-        include:{asistencia:true, Eventos:true , graduaciones:true},
+        data: {id:data.id,
+          nombre: data.nombre,
+          apellido: data.apellido,
+          fechaNacimiento: data.fechaNacimiento,
+          fechaInicio: data.fechaInicio,
+          graduacionActual: data.graduacionActual,
+          fechaGradActual: data.fechaGradActual,
+          email: data.email,
+          telefono: data.telefono,
+          direccion: data.direccion,
+          dni: data.dni,
+          passwordHash: data.passwordHash,
+          foto: data.foto,
+          asistencia: {connect: data.asistencia.map((asisId: any) => ({ id: asisId })) }, 
+          Eventos: {connect: data.Eventos.map((eventosId: any) => ({ id: eventosId })) },
+          graduaciones: {connect: data.graduaciones.map((graduacionesId: any) => ({ id: graduacionesId })) }
+        }
+
+
       });
       res.status(200).json(alumno);
     } catch (error) {

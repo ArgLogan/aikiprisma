@@ -125,6 +125,22 @@ export default function ActualizarAlumnoForm() {
             required
             className="w-full p-2 border rounded"
           />
+          <input
+            name="fechaInicio"
+            value={selectedAlumno.fechaInicio}
+            onChange={handleInputChange}
+            placeholder="Fecha de Inicio"
+            required
+            className="w-full p-2 border rounded"
+          />
+          <input
+            name="fechaGradActual"
+            value={selectedAlumno.fechaGradActual}
+            onChange={handleInputChange}
+            placeholder="Fecha de fecha Grad Actual"
+            required
+            className="w-full p-2 border rounded"
+          />
           {/* Agrega más campos según sea necesario */}
           <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Actualizar Alumno

@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'GET') {
     try {
       const alumnos = await prisma.alumno.findMany({
-        include:{asistencia:true},
+        include:{asistencia:true, Eventos:true, graduaciones:true},
       }); // Ajusta según tu modelo
       res.status(200).json(alumnos);
     } catch (error) {
