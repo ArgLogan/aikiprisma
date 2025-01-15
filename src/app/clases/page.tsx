@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Alumno {
   id: number;
@@ -8,6 +9,7 @@ interface Alumno {
 }
 
 export default function ClasesForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     fecha: '',
     instructor: '',
@@ -67,6 +69,10 @@ export default function ClasesForm() {
     }
   };
 
+  const handleDeleteRedirect = () => {
+    router.push('/clases/delete');
+  };
+
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
       <h2 className="text-2xl font-bold mb-4">Registrar Clase</h2>
@@ -102,9 +108,18 @@ export default function ClasesForm() {
           ))}
         </div>
       </div>
-      <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Registrar Clase
-      </button>
+      <div className="flex space-x-4">
+        <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Registrar Clase
+        </button>
+        <button
+          type="button"
+          onClick={handleDeleteRedirect}
+          className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          Eliminar Clase
+        </button>
+      </div>
     </form>
   );
 }

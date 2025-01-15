@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Clase {
   id: number;
@@ -9,6 +10,7 @@ interface Clase {
 }
 
 export default function BorrarClaseForm() {
+  const router = useRouter();
   const [clases, setClases] = useState<Clase[]>([]);
   const [selectedClaseId, setSelectedClaseId] = useState<number | null>(null);
 
@@ -49,6 +51,10 @@ export default function BorrarClaseForm() {
     }
   };
 
+  const handleBack = () => {
+    router.push('/clases');
+  };
+
   return (
     <form onSubmit={handleDelete} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
       <h2 className="text-2xl font-bold mb-4">Borrar Clase</h2>
@@ -67,9 +73,14 @@ export default function BorrarClaseForm() {
           </option>
         ))}
       </select>
-      <button type="submit" className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600">
-        Borrar Clase
-      </button>
+      <div className="flex space-x-4">
+        <button type="submit" className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600">
+          Borrar Clase
+        </button>
+        <button type="button" onClick={handleBack} className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Volver
+        </button>
+      </div>
     </form>
   );
 }
