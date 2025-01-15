@@ -26,11 +26,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           dni: data.dni,
           passwordHash: data.passwordHash,
           foto: data.foto,
-          asistencia: {connect: data.asistencia.map((asisId: any) => ({ id: asisId })) }, 
-          Eventos: {connect: data.Eventos.map((eventosId: any) => ({ id: eventosId })) },
-          graduaciones: {connect: data.graduaciones.map((graduacionesId: any) => ({ id: graduacionesId })) }
+          asistencia: {connect: data.asistencia.map((asisId: any) => ({ id: asisId.id })) }, 
+          Eventos: {connect: data.Eventos.map((eventosId: any) => ({ id: eventosId.id })) },
+          graduaciones: {connect: data.graduaciones.map((graduacionesId: any) => ({ id: graduacionesId.id })) }
         }
-
 
       });
       res.status(200).json(alumno);
