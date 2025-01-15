@@ -29,7 +29,7 @@ export default function CrearFeriadoForm() {
         alert('Error al crear el feriado');
       }
     } catch (error) {
-      alert('Hubo un problema con la solicitud');
+      alert(`Hubo un problema con la solicitud: ${error}`);
     }
   };
 

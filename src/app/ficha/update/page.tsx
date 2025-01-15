@@ -29,7 +29,7 @@ export default function ActualizarAlumnoForm() {
         const data = await response.json();
         setAlumnos(data);
       } catch (error) {
-        alert('Error al cargar los alumnos');
+        alert(`Error al cargar los alumnos: ${error}`);	
       }
     };
     fetchAlumnos();
@@ -65,7 +65,7 @@ export default function ActualizarAlumnoForm() {
         alert('Error al actualizar el alumno');
       }
     } catch (error) {
-      alert('Hubo un problema con la solicitud');
+      alert(`Hubo un problema con la solicitud: ${error}`);	
     }
   };
 

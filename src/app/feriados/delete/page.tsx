@@ -19,7 +19,7 @@ export default function BorrarFeriadoForm() {
         const data = await response.json();
         setFeriados(data);
       } catch (error) {
-        alert('Error al cargar los feriados');
+        alert(`Error al cargar los feriados: ${error}`);	
       }
     };
     fetchFeriados();
@@ -45,7 +45,7 @@ export default function BorrarFeriadoForm() {
         alert('Error al borrar el feriado');
       }
     } catch (error) {
-      alert('Hubo un problema con la solicitud');
+      alert(`Hubo un problema con la solicitud: ${error}`);
     }
   };
 

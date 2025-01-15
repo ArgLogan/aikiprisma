@@ -5,7 +5,25 @@ const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
-
+  interface Clase {
+    id: number;
+    fecha: string;
+    instructor: string;
+  }
+  interface Evento{
+    id:        number;
+    nombre:    string;
+    fecha:     string;
+    categoria: string;
+  }
+  interface Graduacion{
+    id: number;
+    nivel:  string;
+    tipo:   string;
+    fecha:  string;
+    dojo:   string;
+  }
+  
   if (req.method === 'PUT') {
     try {
       const data = req.body;
@@ -26,15 +44,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           dni: data.dni,
           passwordHash: data.passwordHash,
           foto: data.foto,
-          asistencia: {connect: data.asistencia.map((asisId: any) => ({ id: asisId.id })) }, 
-          Eventos: {connect: data.Eventos.map((eventosId: any) => ({ id: eventosId.id })) },
-          graduaciones: {connect: data.graduaciones.map((graduacionesId: any) => ({ id: graduacionesId.id })) }
+          asistencia: {connect: data.asistencia.map((asisId: Clase) => ({ id: asisId.id })) }, 
+          Eventos: {connect: data.Eventos.map((eventosId: Evento) => ({ id: eventosId.id })) },
+          graduaciones: {connect: data.graduaciones.map((graduacionesId: Graduacion) => ({ id: graduacionesId.id })) }
         }
 
       });
       res.status(200).json(alumno);
     } catch (error) {
-      res.status(500).json({ error: 'Error al actualizar el alumno' });
+      res.status(500).json({ error: `Error al actualizar el alumno: ${error}` });	
     }
   } else {
     res.setHeader('Allow', ['PUT']);

@@ -18,7 +18,7 @@ export default function DeleteAlumnoForm() {
         const data = await response.json();
         setAlumnos(data);
       } catch (error) {
-        alert('Error al cargar la lista de alumnos');
+        alert(`Error al cargar la lista de alumnos: ${error}`);	
       }
     };
     fetchAlumnos();
@@ -43,7 +43,7 @@ export default function DeleteAlumnoForm() {
         alert('Error al eliminar el alumno');
       }
     } catch (error) {
-      alert('Hubo un problema con la solicitud');
+      alert(`Hubo un problema con la solicitud: ${error}`);	
     }
   };
 

@@ -21,7 +21,7 @@ export default function BorrarClaseForm() {
         const data = await response.json();
         setClases(data);
       } catch (error) {
-        alert('Error al cargar las clases');
+        alert(`Error al cargar las clases: ${error}`);
       }
     };
     fetchClases();
@@ -47,7 +47,7 @@ export default function BorrarClaseForm() {
         alert('Error al borrar la clase');
       }
     } catch (error) {
-      alert('Hubo un problema con la solicitud');
+      alert(`Hubo un problema con la solicitud: ${error}`);	
     }
   };
 
