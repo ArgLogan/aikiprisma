@@ -21,6 +21,7 @@ export default function ClasesForm() {
     const fetchAlumnos = async () => {
       try {
         const response = await fetch('/api/alumno/alumnos');
+        console.log('response:', response);
         const data = await response.json();
         setAlumnos(data);
       } catch (error) {
