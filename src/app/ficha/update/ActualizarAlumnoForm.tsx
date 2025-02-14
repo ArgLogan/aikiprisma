@@ -149,6 +149,14 @@ export default function ActualizarAlumnoForm() {
             required
             className="w-full p-2 border rounded"
           />
+          <input
+            name="graduacionActual"
+            value={selectedAlumno.graduacionActual}
+            onChange={handleInputChange}
+            placeholder="Graduacion Actual"
+            required
+            className="w-full p-2 border rounded"
+          />
           {/* Agrega más campos según sea necesario */}
           <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Actualizar Alumno

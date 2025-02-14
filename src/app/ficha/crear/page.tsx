@@ -19,7 +19,7 @@ export default function AlumnoForm() {
   });
 
   const graduaciones = [
-    '5to kyu', '4to kyu', '3er kyu', '2do kyu', '1er kyu',
+    'mu Kyu','5to kyu', '4to kyu', '3er kyu', '2do kyu', '1er kyu',
     '1er Dan', '2do Dan', '3er Dan', '4to Dan', '5to Dan', '6to Dan', '7mo Dan'
   ];
 
