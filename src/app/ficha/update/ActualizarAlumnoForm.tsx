@@ -11,9 +11,6 @@ interface Alumno {
   graduacionActual: string;
   fechaGradActual: string;
   email: string;
-  telefono: string;
-  direccion: string;
-  dni: string;
   passwordHash: string;
   foto: string;
 }
@@ -114,14 +111,6 @@ export default function ActualizarAlumnoForm() {
             value={selectedAlumno.email}
             onChange={handleInputChange}
             placeholder="Email"
-            required
-            className="w-full p-2 border rounded"
-          />
-          <input
-            name="telefono"
-            value={selectedAlumno.telefono}
-            onChange={handleInputChange}
-            placeholder="Teléfono"
             required
             className="w-full p-2 border rounded"
           />

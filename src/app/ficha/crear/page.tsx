@@ -11,9 +11,6 @@ export default function AlumnoForm() {
     graduacionActual: '',
     fechaGradActual: '',
     email: '',
-    telefono: '',
-    direccion: '',
-    dni: '',
     passwordHash: '',
     foto: '',
   });
@@ -47,9 +44,6 @@ export default function AlumnoForm() {
           graduacionActual: '1er Dan',
           fechaGradActual: '',
           email: '',
-          telefono: '',
-          direccion: '',
-          dni: '',
           passwordHash: '',
           foto: '',
         });
@@ -80,6 +74,7 @@ export default function AlumnoForm() {
         required
         className="w-full p-2 border rounded"
       />
+      <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
       <input
         name="fechaNacimiento"
         type="date"
@@ -92,30 +87,6 @@ export default function AlumnoForm() {
         name="email"
         placeholder="Email"
         value={formData.email}
-        onChange={handleChange}
-        required
-        className="w-full p-2 border rounded"
-      />
-      <input
-        name="telefono"
-        placeholder="Teléfono"
-        value={formData.telefono}
-        onChange={handleChange}
-        required
-        className="w-full p-2 border rounded"
-      />
-      <input
-        name="direccion"
-        placeholder="Dirección"
-        value={formData.direccion}
-        onChange={handleChange}
-        required
-        className="w-full p-2 border rounded"
-      />
-      <input
-        name="dni"
-        placeholder="DNI"
-        value={formData.dni}
         onChange={handleChange}
         required
         className="w-full p-2 border rounded"
@@ -136,6 +107,7 @@ export default function AlumnoForm() {
         required
         className="w-full p-2 border rounded"
       />
+      <label htmlFor="fechaInicio">Fecha de Inicio</label>
       <input
         name="fechaInicio"
         type="date"
@@ -144,6 +116,7 @@ export default function AlumnoForm() {
         required
         className="w-full p-2 border rounded"
       />
+      <label htmlFor="fechaGradActual"> Fecha de graduación actual</label>
       <input
         name="fechaGradActual"
         type="date"
