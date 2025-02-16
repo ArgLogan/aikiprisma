@@ -11,6 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         fecha,
         instructor,
         presentes,
+        tipo,
 
     } = req.body;
 
@@ -19,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         data: {
           fecha,
           instructor,
+          tipo,
           presentes: {
             connect: presentes.map((alumno: { id: number }) => ({
               id: alumno.id
