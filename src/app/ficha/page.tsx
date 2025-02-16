@@ -11,6 +11,7 @@ interface Asistencia {
   id: number
   fecha: string
   instructor: string
+  tipo: string
 }
 
 interface Alumno {
