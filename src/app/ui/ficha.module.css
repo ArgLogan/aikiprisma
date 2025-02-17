@@ -1,8 +1,26 @@
 .titulo{
     color: black;
-    font-size: 20px;
+    font-size: 16px;
 }
 .titulo span{
     font-size: large;
     font-weight: bold;
+}
+.nombre{
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 2 rem;
+}
+
+.forminput{
+    font-size: 1rem; /* Equivalente a text-2xl en Tailwind */
+    margin-bottom: 0.5rem; /* Equivalente a mb-2 en Tailwind */
+    width: 100%; /* Equivalente a w-full en Tailwind */
+    padding: 0.5rem; /* Equivalente a p-2 en Tailwind */
+    border: 1px solid #5f5e5e; /* Equivalente a border en Tailwind, con color negro */
+    border-radius: 0.25rem; /* Equivalente a rounded en Tailwind */
+    color: black; /* Color de fuente negro */
+}
+.mar10 {
+    margin-top: 10px;
 }

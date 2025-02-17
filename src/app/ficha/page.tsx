@@ -80,23 +80,23 @@ export default function AlumnoList() {
           width={128}
           height={128}
         />
-        <h2 className="text-2xl font-bold mb-2">
+        <h2 className={styles.nombre}>
           {selectedAlumno.nombre} {selectedAlumno.apellido}
         </h2>
         <p className={styles.titulo}>
           <span >Email:</span> {selectedAlumno.email}
         </p>
-        <p>
-        <span className={styles.resaltado}>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
+        <p className={styles.titulo}>
+        <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
         </p>
-        <p>
-        <span className={styles.resaltado}>Fecha de Inicio:</span> {formatearFecha(selectedAlumno.fechaInicio)}
+        <p className={styles.titulo}>
+        <span>Fecha de Inicio:</span> {formatearFecha(selectedAlumno.fechaInicio)}
         </p>
-        <p>
-        <span className={styles.resaltado}>Graduación Actual:</span> {selectedAlumno.graduacionActual} 
+        <p className={styles.titulo}>
+        <span>Graduación Actual:</span> {selectedAlumno.graduacionActual} 
         </p>
-        <p> 
-        <span className={styles.resaltado}> Fecha:</span> {formatearFecha(selectedAlumno.fechaGradActual)}
+        <p className={styles.titulo}>
+        <span> Fecha:</span> {formatearFecha(selectedAlumno.fechaGradActual)}
         </p>
       </div>
       <div className="mt-4 flex justify-between w-full max-w-sm">

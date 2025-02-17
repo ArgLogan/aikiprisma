@@ -1,6 +1,7 @@
 
 'use client';
 import { useState } from 'react';
+import styles from '../../ui/ficha.module.css'
 
 export default function AlumnoForm() {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ export default function AlumnoForm() {
           apellido: '',
           fechaNacimiento: '',
           fechaInicio: '',
-          graduacionActual: '1er Dan',
+          graduacionActual: '',
           fechaGradActual: '',
           email: '',
           passwordHash: '',
@@ -57,14 +58,14 @@ export default function AlumnoForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
-      <h2 className="text-2xl font-bold mb-4">Agregar Alumno</h2>
+      <h2 className={styles.nombre}>Agregar Alumno</h2>
       <input
         name="nombre"
         placeholder="Nombre"
         value={formData.nombre}
         onChange={handleChange}
         required
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
       <input
         name="apellido"
@@ -72,16 +73,16 @@ export default function AlumnoForm() {
         value={formData.apellido}
         onChange={handleChange}
         required
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
-      <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
+      <label  className={styles.mar10} htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
       <input
         name="fechaNacimiento"
         type="date"
         value={formData.fechaNacimiento}
         onChange={handleChange}
         required
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
       <input
         name="email"
@@ -89,14 +90,14 @@ export default function AlumnoForm() {
         value={formData.email}
         onChange={handleChange}
         required
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
       <input
         name="foto"
         placeholder="URL de la foto"
         value={formData.foto}
         onChange={handleChange}
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
       <input
         name="passwordHash"
@@ -105,31 +106,31 @@ export default function AlumnoForm() {
         value={formData.passwordHash}
         onChange={handleChange}
         required
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
-      <label htmlFor="fechaInicio">Fecha de Inicio</label>
+      <label  className={styles.mar10} htmlFor="fechaInicio">Fecha de Inicio</label>
       <input
         name="fechaInicio"
         type="date"
         value={formData.fechaInicio}
         onChange={handleChange}
         required
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
-      <label htmlFor="fechaGradActual"> Fecha de graduación actual</label>
+      <label className={styles.mar10} htmlFor="fechaGradActual"> Fecha de graduación actual</label>
       <input
         name="fechaGradActual"
         type="date"
         value={formData.fechaGradActual}
         onChange={handleChange}
         required
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       />
       <select
         name="graduacionActual"
         value={formData.graduacionActual}
         onChange={handleChange}
-        className="w-full p-2 border rounded"
+        className={styles.forminput}
       >
         <option value="" disabled>Selecciona una graduación</option>
         {graduaciones.map((grado) => (
