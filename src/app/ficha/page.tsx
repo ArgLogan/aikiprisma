@@ -83,8 +83,8 @@ export default function AlumnoList() {
         <h2 className="text-2xl font-bold mb-2">
           {selectedAlumno.nombre} {selectedAlumno.apellido}
         </h2>
-        <p>
-          <span className={styles.resaltado}>Email:</span> {selectedAlumno.email}
+        <p className={styles.titulo}>
+          <span >Email:</span> {selectedAlumno.email}
         </p>
         <p>
         <span className={styles.resaltado}>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
