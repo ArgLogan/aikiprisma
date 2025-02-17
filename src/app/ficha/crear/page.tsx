@@ -75,7 +75,6 @@ export default function AlumnoForm() {
         required
         className={styles.forminput}
       />
-      <label  className={styles.mar10} htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
       <input
         name="fechaNacimiento"
         type="date"
@@ -84,6 +83,7 @@ export default function AlumnoForm() {
         required
         className={styles.forminput}
       />
+      <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
       <input
         name="email"
         placeholder="Email"
@@ -108,7 +108,6 @@ export default function AlumnoForm() {
         required
         className={styles.forminput}
       />
-      <label  className={styles.mar10} htmlFor="fechaInicio">Fecha de Inicio</label>
       <input
         name="fechaInicio"
         type="date"
@@ -117,7 +116,7 @@ export default function AlumnoForm() {
         required
         className={styles.forminput}
       />
-      <label className={styles.mar10} htmlFor="fechaGradActual"> Fecha de graduación actual</label>
+      <label  htmlFor="fechaInicio">Fecha de Inicio</label>
       <input
         name="fechaGradActual"
         type="date"
@@ -126,6 +125,7 @@ export default function AlumnoForm() {
         required
         className={styles.forminput}
       />
+      <label  htmlFor="fechaGradActual"> Fecha de graduación actual</label>
       <select
         name="graduacionActual"
         value={formData.graduacionActual}

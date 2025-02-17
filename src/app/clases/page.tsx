@@ -13,6 +13,7 @@ export default function ClasesForm() {
   const [formData, setFormData] = useState({
     fecha: '',
     instructor: '',
+    tipo: '',
     presentes: [] as { id: number }[],
   });
   const [alumnos, setAlumnos] = useState<Alumno[]>([]);
@@ -60,6 +61,7 @@ export default function ClasesForm() {
         setFormData({
           fecha: '',
           instructor: '',
+          tipo: '',
           presentes: [],
         });
       } else {
@@ -81,6 +83,14 @@ export default function ClasesForm() {
         name="instructor"
         placeholder="Instructor"
         value={formData.instructor}
+        onChange={handleChange}
+        required
+        className="w-full p-2 border rounded"
+      />
+      <input
+        name="tipo"
+        placeholder="tipo"
+        value={formData.tipo}
         onChange={handleChange}
         required
         className="w-full p-2 border rounded"

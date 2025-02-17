@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import styles from '../../ui/ficha.module.css'
 
 interface Alumno {
   id: number;
@@ -68,7 +69,7 @@ export default function ActualizarAlumnoForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
-      <h2 className="text-2xl font-bold mb-4">Actualizar Alumno</h2>
+      <h2 className={styles.titulo}>Actualizar Alumno</h2>
       <select
         onChange={(e) => handleSelectAlumno(Number(e.target.value))}
         className="w-full p-2 border rounded"
@@ -88,7 +89,7 @@ export default function ActualizarAlumnoForm() {
             onChange={handleInputChange}
             placeholder="Nombre"
             required
-            className="w-full p-2 border rounded"
+            className={styles.forminput}
           />
           <input
             name="apellido"
@@ -96,7 +97,15 @@ export default function ActualizarAlumnoForm() {
             onChange={handleInputChange}
             placeholder="Apellido"
             required
-            className="w-full p-2 border rounded"
+            className={styles.forminput}
+          />
+          <input
+            name="foto"
+            value={selectedAlumno.foto}
+            onChange={handleInputChange}
+            placeholder="Foto"
+            required
+            className={styles.forminput}
           />
           <input
             name="fechaNacimiento"
@@ -104,15 +113,16 @@ export default function ActualizarAlumnoForm() {
             onChange={handleInputChange}
             placeholder="Fecha de Nacimiento"
             required
-            className="w-full p-2 border rounded"
+            className={styles.forminput}
           />
+          <label htmlFor="fechaNacimiento"> fecha de nacimiento</label>
           <input
             name="email"
             value={selectedAlumno.email}
             onChange={handleInputChange}
             placeholder="Email"
             required
-            className="w-full p-2 border rounded"
+            className={styles.forminput}
           />
           <input
             name="fechaInicio"
@@ -120,16 +130,18 @@ export default function ActualizarAlumnoForm() {
             onChange={handleInputChange}
             placeholder="Fecha de Inicio"
             required
-            className="w-full p-2 border rounded"
+            className={styles.forminput}
           />
+          <label htmlFor="fechaInicio">Fecha de inicio</label>
           <input
             name="fechaGradActual"
             value={selectedAlumno.fechaGradActual}
             onChange={handleInputChange}
             placeholder="Fecha de fecha Grad Actual"
             required
-            className="w-full p-2 border rounded"
+            className={styles.forminput}
           />
+          <label htmlFor="fechaGradActual">Fecha de graduación actual</label>
           {/* Agrega más campos según sea necesario */}
           <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Actualizar Alumno
