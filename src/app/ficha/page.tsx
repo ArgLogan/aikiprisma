@@ -81,7 +81,7 @@ export default function AlumnoList() {
           height={128}
         />
         <h2 className={styles.nombre}>
-          {selectedAlumno.nombre} {selectedAlumno.apellido}
+          {selectedAlumno.nombre} {selectedAlumno.apellido} --- Aist:{selectedAlumno.asistencia.length}
         </h2>
         <p className={styles.titulo}>
           <span >Email:</span> {selectedAlumno.email}
