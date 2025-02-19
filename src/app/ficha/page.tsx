@@ -69,6 +69,12 @@ export default function AlumnoList() {
   }
 
   const selectedAlumno = alumnos[currentIndex]
+  const asistencia = selectedAlumno.asistencia.filter(clase => {
+    const fechaClase = new Date(clase.fecha); 
+    const fechaUltGrad = new Date(selectedAlumno.fechaGradActual); 
+
+    return fechaClase.getTime() > fechaUltGrad.getTime(); 
+  }).length;
 
   return (
     <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center">
@@ -81,7 +87,7 @@ export default function AlumnoList() {
           height={128}
         />
         <h2 className={styles.nombre}>
-          {selectedAlumno.nombre} {selectedAlumno.apellido} --- Aist:{selectedAlumno.asistencia.length}
+          {selectedAlumno.nombre} {selectedAlumno.apellido} --- Aist:{asistencia}
         </h2>
         <p className={styles.titulo}>
           <span >Email:</span> {selectedAlumno.email}

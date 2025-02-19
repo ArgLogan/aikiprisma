@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .form {
+    color: black;
+    flex: 1;
+  }
+  
+  .clasesList {
+    flex: 1;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 800px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .clasesList {
+      order: -1; /* Mueve la lista arriba en dispositivos móviles */
+    }
+  }
