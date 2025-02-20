@@ -11,6 +11,7 @@
   }
   
   .clasesList {
+    color: black;
     flex: 1;
   }
   
@@ -21,6 +22,6 @@
     }
   
     .clasesList {
-      order: -1; /* Mueve la lista arriba en dispositivos móviles */
+      order: 1; /* Mueve la lista arriba en dispositivos móviles */
     }
   }

@@ -251,7 +251,7 @@ export default function ClasesForm() {
           value={formData.instructor}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded mb-2"
         />
         <input
           name="tipo"
@@ -259,7 +259,7 @@ export default function ClasesForm() {
           value={formData.tipo}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded mb-2"
         />
         <input
           name="fecha"
@@ -267,7 +267,7 @@ export default function ClasesForm() {
           value={formData.fecha}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded mb-2"
         />
         <div>
           <h3 className="text-lg font-semibold mb-2">Seleccionar Alumnos Presentes</h3>
