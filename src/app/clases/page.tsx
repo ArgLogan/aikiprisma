@@ -1,12 +1,19 @@
 // 'use client';
 // import { useState, useEffect } from 'react';
 // import { useRouter } from 'next/navigation';
-// import  styles from '../ui/clases.module.css';
+// import styles from '../ui/clases.module.css';
 
 // interface Alumno {
 //   id: number;
 //   nombre: string;
 //   apellido: string;
+// }
+
+// interface Clase {
+//   id: number;
+//   fecha: string;
+//   instructor: string;
+//   tipo: string;
 // }
 
 // export default function ClasesForm() {
@@ -18,12 +25,13 @@
 //     presentes: [] as { id: number }[],
 //   });
 //   const [alumnos, setAlumnos] = useState<Alumno[]>([]);
+//   const [clases, setClases] = useState<Clase[]>([]); // Estado para almacenar las clases
 
+//   // Obtener la lista de alumnos
 //   useEffect(() => {
 //     const fetchAlumnos = async () => {
 //       try {
 //         const response = await fetch('/api/alumno/alumnos');
-//         console.log('response:', response);
 //         const data = await response.json();
 //         setAlumnos(data);
 //       } catch (error) {
@@ -31,6 +39,20 @@
 //       }
 //     };
 //     fetchAlumnos();
+//   }, []);
+
+//   // Obtener la lista de clases
+//   useEffect(() => {
+//     const fetchClases = async () => {
+//       try {
+//         const response = await fetch('/api/fechas/clases');
+//         const data = await response.json();
+//         setClases(data);
+//       } catch (error) {
+//         alert(`Error al cargar la lista de clases, ${error}`);
+//       }
+//     };
+//     fetchClases();
 //   }, []);
 
 //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +87,10 @@
 //           tipo: '',
 //           presentes: [],
 //         });
+//         // Recargar la lista de clases después de crear una nueva
+//         const response = await fetch('/api/clases');
+//         const data = await response.json();
+//         setClases(data);
 //       } else {
 //         alert('Error al crear la clase');
 //       }
@@ -78,61 +104,75 @@
 //   };
 
 //   return (
-//     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
-//       <h2 className="text-2xl font-bold mb-4">Registrar Clase</h2>
-//       <input
-//         name="instructor"
-//         placeholder="Instructor"
-//         value={formData.instructor}
-//         onChange={handleChange}
-//         required
-//         className="w-full p-2 border rounded"
-//       />
-//       <input
-//         name="tipo"
-//         placeholder="tipo"
-//         value={formData.tipo}
-//         onChange={handleChange}
-//         required
-//         className="w-full p-2 border rounded"
-//       />
-//       <input
-//         name="fecha"
-//         type="date"
-//         value={formData.fecha}
-//         onChange={handleChange}
-//         required
-//         className="w-full p-2 border rounded"
-//       />
-//       <div>
-//         <h3 className="text-lg font-semibold mb-2">Seleccionar Alumnos Presentes</h3>
-//         <div className="max-h-40 overflow-y-auto space-y-2">
-//           {alumnos.map((alumno) => (
-//             <label key={alumno.id} className="flex items-center space-x-2">
-//               <input
-//                 type="checkbox"
-//                 checked={formData.presentes.some((a) => a.id === alumno.id)}
-//                 onChange={() => handleCheckboxChange(alumno.id)}
-//                 className="w-4 h-4"
-//               />
-//               <span>{`${alumno.nombre} ${alumno.apellido}`}</span>
-//             </label>
-//           ))}
+//     <div className={styles.container}>
+//       <form onSubmit={handleSubmit} className={styles.form}>
+//         <h2 className="text-2xl font-bold mb-4">Registrar Clase</h2>
+//         <input
+//           name="instructor"
+//           placeholder="Instructor"
+//           value={formData.instructor}
+//           onChange={handleChange}
+//           required
+//           className="w-full p-2 border rounded mb-2"
+//         />
+//         <input
+//           name="tipo"
+//           placeholder="Tipo"
+//           value={formData.tipo}
+//           onChange={handleChange}
+//           required
+//           className="w-full p-2 border rounded mb-2"
+//         />
+//         <input
+//           name="fecha"
+//           type="date"
+//           value={formData.fecha}
+//           onChange={handleChange}
+//           required
+//           className="w-full p-2 border rounded mb-2"
+//         />
+//         <div>
+//           <h3 className="text-lg font-semibold mb-2">Seleccionar Alumnos Presentes</h3>
+//           <div className="max-h-40 overflow-y-auto space-y-2">
+//             {alumnos.map((alumno) => (
+//               <label key={alumno.id} className="flex items-center space-x-2">
+//                 <input
+//                   type="checkbox"
+//                   checked={formData.presentes.some((a) => a.id === alumno.id)}
+//                   onChange={() => handleCheckboxChange(alumno.id)}
+//                   className="w-4 h-4"
+//                 />
+//                 <span>{`${alumno.nombre} ${alumno.apellido}`}</span>
+//               </label>
+//             ))}
+//           </div>
 //         </div>
+//         <div className="flex space-x-4">
+//           <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+//             Registrar Clase
+//           </button>
+//           <button
+//             type="button"
+//             onClick={handleDeleteRedirect}
+//             className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
+//           >
+//             Eliminar Clase
+//           </button>
+//         </div>
+//       </form>
+
+//       {/* Lista de clases cargadas */}
+//       <div className={styles.clasesList}>
+//         <h2 className="text-2xl font-bold mb-4">Clases Registradas</h2>
+//         <ul>
+//           {clases.map((clase) => (
+//             <li key={clase.id} className="mb-2">
+//               <p><strong>Fecha:</strong> {clase.fecha}</p>
+//             </li>
+//           ))}
+//         </ul>
 //       </div>
-//       <div className="flex space-x-4">
-//         <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-//           Registrar Clase
-//         </button>
-//         <button
-//           type="button"
-//           onClick={handleDeleteRedirect}
-//           className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
-//         >
-//           Eliminar Clase
-//         </button>
-//       </div>
-//     </form>
+//     </div>
 //   );
 // }
 
@@ -140,6 +180,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../ui/clases.module.css';
+import { formatearFecha } from '../funcs/funciones'; 
 
 interface Alumno {
   id: number;
@@ -163,7 +204,18 @@ export default function ClasesForm() {
     presentes: [] as { id: number }[],
   });
   const [alumnos, setAlumnos] = useState<Alumno[]>([]);
-  const [clases, setClases] = useState<Clase[]>([]); // Estado para almacenar las clases
+  const [clases, setClases] = useState<string[]>([]); // Estado para almacenar las clases
+  const [expanded, setExpanded] = useState(false); // Estado para controlar la expansión de la lista
+
+  function ordenarFechas(clases: Clase[]): string[] {
+    // Extraer las fechas del array de objetos Clase
+    const fechas = clases.map((clase) => clase.fecha);
+  
+    // Ordenar las fechas de la más actual a la más antigua
+    fechas.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+  
+    return fechas;
+  }
 
   // Obtener la lista de alumnos
   useEffect(() => {
@@ -185,7 +237,7 @@ export default function ClasesForm() {
       try {
         const response = await fetch('/api/fechas/clases');
         const data = await response.json();
-        setClases(data);
+        setClases(ordenarFechas(data));
       } catch (error) {
         alert(`Error al cargar la lista de clases, ${error}`);
       }
@@ -226,9 +278,9 @@ export default function ClasesForm() {
           presentes: [],
         });
         // Recargar la lista de clases después de crear una nueva
-        const response = await fetch('/api/clases');
+        const response = await fetch('/api/fechas/clases');
         const data = await response.json();
-        setClases(data);
+        setClases(ordenarFechas(data));
       } else {
         alert('Error al crear la clase');
       }
@@ -240,6 +292,9 @@ export default function ClasesForm() {
   const handleDeleteRedirect = () => {
     router.push('/clases/delete');
   };
+
+  // Mostrar solo los primeros 10 elementos si no está expandido
+  const displayedClases = expanded ? clases : clases.slice(0, 10);
 
   return (
     <div className={styles.container}>
@@ -303,12 +358,20 @@ export default function ClasesForm() {
       <div className={styles.clasesList}>
         <h2 className="text-2xl font-bold mb-4">Clases Registradas</h2>
         <ul>
-          {clases.map((clase) => (
-            <li key={clase.id} className="mb-2">
-              <p><strong>Fecha:</strong> {clase.fecha}</p>
+          {displayedClases.map((clase) => (
+            <li key={clase} className="mb-2">
+              <p><strong>Fecha:</strong> {formatearFecha(clase)}</p>
             </li>
           ))}
         </ul>
+        {clases.length > 10 && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-4 text-blue-500 hover:text-blue-700"
+          >
+            {expanded ? 'Mostrar menos' : 'Mostrar más'}
+          </button>
+        )}
       </div>
     </div>
   );
