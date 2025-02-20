@@ -24,4 +24,5 @@ function formatearFecha(fechaOriginal: string): string {
     return fechaFormateada;
 }
 
+
 export { formatearFecha };

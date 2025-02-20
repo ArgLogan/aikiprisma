@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { formatearFecha } from '../funcs/funciones'; 
-
+import { formatearFecha, calculaCantDias } from '../funcs/funciones'; 
+ 
 
 interface Asistencia {
   id: number
@@ -76,6 +76,8 @@ export default function AlumnoList() {
     return fechaClase.getTime() > fechaUltGrad.getTime(); 
   }).length;
 
+  const asitenciaDetalle = calculaCantDias(['Martes','Jueves','Sabado'],selectedAlumno.fechaGradActual,new Date());
+
   return (
     <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
@@ -87,14 +89,8 @@ export default function AlumnoList() {
           height={128}
         />
         <h2 className={styles.nombre}>
-          {selectedAlumno.nombre} {selectedAlumno.apellido} --- Aist:{asistencia}
+          {selectedAlumno.nombre} {selectedAlumno.apellido} 
         </h2>
-        <p className={styles.titulo}>
-          <span >Email:</span> {selectedAlumno.email}
-        </p>
-        <p className={styles.titulo}>
-        <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
-        </p>
         <p className={styles.titulo}>
         <span>Fecha de Inicio:</span> {formatearFecha(selectedAlumno.fechaInicio)}
         </p>
@@ -103,6 +99,16 @@ export default function AlumnoList() {
         </p>
         <p className={styles.titulo}>
         <span> Fecha:</span> {formatearFecha(selectedAlumno.fechaGradActual)}
+        </p>
+        <h2 className={styles.nombre}>Asistencia</h2>
+        <p className={styles.titulo}>
+          <span >Presente:</span> {asistencia} <span>Ausente:</span> {asitenciaDetalle.cantidad-asistencia}  Meses: {asitenciaDetalle.meses}
+        </p>
+        <p className={styles.titulo}>
+          <span >Email:</span> {selectedAlumno.email}
+        </p>
+        <p className={styles.titulo}>
+        <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
         </p>
       </div>
       <div className="mt-4 flex justify-between w-full max-w-sm">
