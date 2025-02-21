@@ -2,8 +2,10 @@
 'use client';
 import { useState } from 'react';
 import styles from '../../ui/ficha.module.css'
+import { useRouter } from 'next/navigation'
 
 export default function AlumnoForm() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -55,6 +57,9 @@ export default function AlumnoForm() {
       alert(`Hubo un problema con la solicitud: ${error}`);
     }
   };
+  const handleNavigation = (route: string) => {
+    router.push(route)
+  }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
@@ -142,6 +147,13 @@ export default function AlumnoForm() {
       <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
         Agregar Alumno
       </button>
+      <button 
+            type='button'
+            className=" p-2 bg-red-500 text-white rounded hover:bg-red-600"
+            onClick={() => handleNavigation('/ficha')}
+          >
+            Cancelar
+          </button>
     </form>
   );
 }

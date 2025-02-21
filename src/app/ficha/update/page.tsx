@@ -18,9 +18,7 @@ interface Alumno {
 }
 
 export default function ActualizarAlumnoForm() {
-  //const [alumnos, setAlumnos] = useState<Alumno[]>([]);
   const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null);
-  //const selectedAlumno = sessionStorage.getItem('alumno') ? JSON.parse(sessionStorage.getItem('alumno') as string) : null;
   const router = useRouter()
   useEffect(() => {
     const alumnoData = sessionStorage.getItem('alumno');
@@ -35,7 +33,6 @@ export default function ActualizarAlumnoForm() {
     }
   };
   const handleNavigation = (route: string) => {
-    
     router.push(route)
   }
   const handleSubmit = async (e: React.FormEvent) => {

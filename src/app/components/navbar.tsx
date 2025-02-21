@@ -8,6 +8,9 @@ export default function Navbar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  const closeMenu = () => {
+    setIsOpen(false); // Cierra el menú
+  };
 
   return (
     <nav className="bg-blue-500 text-white">
@@ -57,16 +60,16 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link href="/" className="block px-3 py-2 rounded hover:bg-blue-700">
+            <Link href="/" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Home
             </Link>
-            <Link href="/ficha" className="block px-3 py-2 rounded hover:bg-blue-700">
+            <Link href="/ficha" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Alumnos
             </Link>
-            <Link href="/clases" className="block px-3 py-2 rounded hover:bg-blue-700">
+            <Link href="/clases" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Clases
             </Link>
-            <Link href="/feriados" className="block px-3 py-2 rounded hover:bg-blue-700">
+            <Link href="/feriados" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Feriados
             </Link>
           </div>
