@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from '../../ui/ficha.module.css'
+import { useRouter } from 'next/navigation'
 
 interface Alumno {
   id: number;
@@ -17,20 +18,15 @@ interface Alumno {
 }
 
 export default function ActualizarAlumnoForm() {
-  const [alumnos, setAlumnos] = useState<Alumno[]>([]);
+  //const [alumnos, setAlumnos] = useState<Alumno[]>([]);
   const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null);
-
+  //const selectedAlumno = sessionStorage.getItem('alumno') ? JSON.parse(sessionStorage.getItem('alumno') as string) : null;
+  const router = useRouter()
   useEffect(() => {
-    const fetchAlumnos = async () => {
-      try {
-        const response = await fetch('/api/alumno/alumnos');
-        const data = await response.json();
-        setAlumnos(data);
-      } catch (error) {
-        alert(`Error al cargar los alumnos: ${error}`);	
-      }
-    };
-    fetchAlumnos();
+    const alumnoData = sessionStorage.getItem('alumno');
+    if (alumnoData) {
+      setSelectedAlumno(JSON.parse(alumnoData));
+    }
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,12 +34,10 @@ export default function ActualizarAlumnoForm() {
       setSelectedAlumno({ ...selectedAlumno, [e.target.name]: e.target.value });
     }
   };
-
-  const handleSelectAlumno = (id: number) => {
-    const alumno = alumnos.find((a) => a.id === id);
-    setSelectedAlumno(alumno || null);
-  };
-
+  const handleNavigation = (route: string) => {
+    
+    router.push(route)
+  }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedAlumno) {
@@ -59,6 +53,7 @@ export default function ActualizarAlumnoForm() {
 
       if (response.ok) {
         alert('Alumno actualizado con éxito');
+        handleNavigation('/ficha');
       } else {
         alert('Error al actualizar el alumno');
       }
@@ -70,17 +65,7 @@ export default function ActualizarAlumnoForm() {
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
       <h2 className={styles.titulo}>Actualizar Alumno</h2>
-      <select
-        onChange={(e) => handleSelectAlumno(Number(e.target.value))}
-        className="w-full p-2 border rounded"
-      >
-        <option value="">Seleccionar un alumno</option>
-        {alumnos.map((alumno) => (
-          <option key={alumno.id} value={alumno.id}>
-            {`${alumno.nombre} ${alumno.apellido}`}
-          </option>
-        ))}
-      </select>
+      
       {selectedAlumno && (
         <>
           <input
@@ -141,27 +126,21 @@ export default function ActualizarAlumnoForm() {
             required
             className={styles.forminput}
           />
-          <label htmlFor="fechaGradActual">Fecha de graduación actual</label>
+          <label htmlFor="fechaGradActual" >Fecha de graduación actual</label>
           {/* Agrega más campos según sea necesario */}
           <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Actualizar Alumno
+          </button>
+
+          <button 
+            type='button'
+            className=" p-2 bg-red-500 text-white rounded hover:bg-red-600"
+            onClick={() => handleNavigation('/ficha')}
+          >
+            Cancelar
           </button>
         </>
       )}
     </form>
   );
 }
-// import { PrismaClient } from "@prisma/client";
-// import ActualizarAlumnoForm from "./ActualizarAlumnoForm";
-
-// const prisma = new PrismaClient();
-
-// // 🟢 Obtiene alumnos desde la DB en el servidor
-// async function getAlumnos() {
-//   return prisma.alumno.findMany();
-// }
-
-// export default async function Page() {
-//   const alumnos = await getAlumnos();
-//   return <ActualizarAlumnoForm alumnos={alumnos} />;
-// }
