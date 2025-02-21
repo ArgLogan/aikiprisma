@@ -5,6 +5,8 @@ import { useSwipeable } from 'react-swipeable'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { formatearFecha, calculaCantDias } from '../funcs/funciones'; 
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'; 
+import { GrUserAdd } from "react-icons/gr";
  
 
 interface Asistencia {
@@ -120,34 +122,32 @@ export default function AlumnoList() {
           Anterior
         </button>
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-          onClick={() => handleSwipe('left')}
-          disabled={currentIndex === alumnos.length - 1}
-        >
-          Siguiente
-        </button>
-      </div>
-      <div className="mt-6 flex space-x-4">
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-          onClick={() =>{
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center justify-center"
+          onClick={() => {
             sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
-            handleNavigation('/ficha/update')}
-          } 
+            handleNavigation('/ficha/update');
+          }}
         >
-          Modificar
-        </button>
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-          onClick={() => handleNavigation('/ficha/borrar')}
-        >
-          Borrar
+          <FaPencilAlt className="m-2" /> {/* Ícono de lápiz */}
         </button>
         <button
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           onClick={() => handleNavigation('/ficha/crear')}
         >
-          Crear
+          <GrUserAdd className='m-2'/>
+        </button>
+        <button
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          onClick={() => handleNavigation('/ficha/borrar')}
+        >
+          <FaTrashAlt className="m-2"/>
+        </button>
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          onClick={() => handleSwipe('left')}
+          disabled={currentIndex === alumnos.length - 1}
+        >
+          Siguiente
         </button>
       </div>
     </div>
