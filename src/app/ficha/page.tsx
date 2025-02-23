@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { formatearFecha, calculaCantDias } from '../funcs/funciones'; 
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'; 
 import { GrUserAdd } from "react-icons/gr";
+import { MdOutlineSportsKabaddi} from "react-icons/md";
  
 type EventoTipo = "CS" | "CD" | "SN" | "SI";
 
@@ -43,7 +44,6 @@ export default function AlumnoList() {
   const router = useRouter()
   const [alumnos, setAlumnos] = useState<Alumno[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  //const [filtro, setFiltro] = useState("");
   const [mostrarTodos, setMostrarTodos] = useState(false);
 
   useEffect(() => {
@@ -91,7 +91,6 @@ export default function AlumnoList() {
 
   const selectedAlumno = alumnos[currentIndex]
   const eventosFiltrados = selectedAlumno.Eventos
-    //.filter(e => (filtro ? e.categoria === filtro : true))
     .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
 
   const eventosMostrados = mostrarTodos ? eventosFiltrados : eventosFiltrados.slice(0, 10);
@@ -104,9 +103,8 @@ export default function AlumnoList() {
   }).length;
 
   const asitenciaDetalle = calculaCantDias(['Martes','Jueves','Sabado'],selectedAlumno.fechaGradActual,new Date());
-  //setFiltro("")
   return (
-    <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center">
+    <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
         <Image
           className="mb-4 w-32 h-32 rounded-full mx-auto"
@@ -176,14 +174,14 @@ export default function AlumnoList() {
         </button>
       </div>
       <div>
-        <h2 className="w-full text-lg font-semibold mb-2 mt-2 text-black">Eventos <span
+        <div className='flex justify-between items-center w-full'>
+          <h2 className="w-full text-lg font-semibold m-2 text-black">Eventos</h2>
+          <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={() => handleNavigation('/ficha/addferiado')}>
+            <MdOutlineSportsKabaddi className='m-1' />
 
-          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={() => handleNavigation('/ficha/addferiado')}
-        >
-          <GrUserAdd className='m-1'/>
-
-        </span></h2>
+          </button>
+        </div>
         <ul className="space-y-2">
           {eventosMostrados.map(evento => (
             <li key={evento.id} className="p-3 bg-white shadow rounded flex items-center">
