@@ -1,22 +1,10 @@
 'use client';
 import { FormEvent, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {formatearFecha} from '../funcs/funciones'
 
 
 type EventoTipo = "CS" | "CD" | "SN" | "SI";
-
-// const eventos: { id: number; categoria: EventoTipo; nombre: string; fecha: string }[] = [
-//   { id: 1, categoria: "CS", nombre: "Shoshin Dojo 20 años", fecha: "2023-05-13" },
-//   { id: 2, categoria: "CS", nombre: "Shin nen Geiko", fecha: "2023-01-01" },
-//   { id: 3, categoria: "CD", nombre: "Febrero Danes", fecha: "2023-02-04" },
-//   { id: 4, categoria: "CD", nombre: "Marzo Danes", fecha: "2023-03-04" },
-//   { id: 5, categoria: "CD", nombre: "Abril Danes", fecha: "2023-04-01" },
-//   { id: 6, categoria: "SN", nombre: "Seminario de verano", fecha: "2023-01-21" },
-//   { id: 7, categoria: "SN", nombre: "Sem Leo Sakanashi", fecha: "2023-04-22" },
-//   { id: 8, categoria: "CD", nombre: "Mayo Danes", fecha: "2023-05-06" },
-//   { id: 9, categoria: "SI", nombre: "Seminario Internacional Japón", fecha: "2023-06-10" },
-//   { id: 10, categoria: "SI", nombre: "Seminario Internacional España", fecha: "2023-07-15" },
-// ];
 
 const iconos = {
   CS: "🔵", // Clase especial
@@ -124,7 +112,7 @@ export default function ListaEventos() {
             <span className="text-2xl mr-3">{iconos[evento.categoria]}</span>
             <div>
               <p className="font-semibold">{evento.nombre}</p>
-              <p className="text-gray-500 text-sm">{evento.fecha}</p>
+              <p className="text-gray-500 text-sm">{formatearFecha( evento.fecha)}</p>
             </div>
           </li>
         ))}

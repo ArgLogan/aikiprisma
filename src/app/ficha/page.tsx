@@ -8,12 +8,19 @@ import { formatearFecha, calculaCantDias } from '../funcs/funciones';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'; 
 import { GrUserAdd } from "react-icons/gr";
  
+type EventoTipo = "CS" | "CD" | "SN" | "SI";
 
 interface Asistencia {
   id: number
   fecha: string
   instructor: string
   tipo: string
+}
+interface Evento {
+  id: number
+  nombre: string
+  categoria: EventoTipo
+  fecha: string
 }
 
 interface Alumno {
@@ -28,12 +35,16 @@ interface Alumno {
   passwordHash: string
   foto: string
   asistencia: Asistencia[]
+  Eventos: Evento[]
+
 }
 
 export default function AlumnoList() {
   const router = useRouter()
   const [alumnos, setAlumnos] = useState<Alumno[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [filtro, setFiltro] = useState("");
+  const [mostrarTodos, setMostrarTodos] = useState(false);
 
   useEffect(() => {
     const fetchAlumnos = async () => {
@@ -43,11 +54,18 @@ export default function AlumnoList() {
         setAlumnos(data)
       } catch (error) {
         console.error('Error fetching alumnos:', error)
-        setAlumnos([{ id: 0, nombre: 'Error', apellido: 'Error', fechaNacimiento: 'Error', fechaInicio: 'Error', graduacionActual: 'Error', fechaGradActual: 'Error', email: 'Error', passwordHash: 'Error', foto: '/uploads/GenericoM.png', asistencia: [] }])
+        setAlumnos([{ id: 0, nombre: 'Error', apellido: 'Error', fechaNacimiento: 'Error', fechaInicio: 'Error', graduacionActual: 'Error', fechaGradActual: 'Error', email: 'Error', passwordHash: 'Error', foto: '/uploads/GenericoM.png', asistencia: [], Eventos: [] }])
       }
     }
     fetchAlumnos()
   }, [])
+
+  const iconos = {
+    CS: "🔵", // Clase especial
+    CD: "🟣", // Clase de Danes
+    SN: "🟢", // Seminario Nacional
+    SI: "🔴", // Seminario Internacional
+  };
 
   const handleSwipe = (direction: string) => {
     if (direction === 'left' && currentIndex < alumnos.length - 1) {
@@ -72,6 +90,12 @@ export default function AlumnoList() {
   }
 
   const selectedAlumno = alumnos[currentIndex]
+  const eventosFiltrados = selectedAlumno.Eventos
+    .filter(e => (filtro ? e.categoria === filtro : true))
+    .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+
+  const eventosMostrados = mostrarTodos ? eventosFiltrados : eventosFiltrados.slice(0, 10);
+
   const asistencia = selectedAlumno.asistencia.filter(clase => {
     const fechaClase = new Date(clase.fecha); 
     const fechaUltGrad = new Date(selectedAlumno.fechaGradActual); 
@@ -151,7 +175,36 @@ export default function AlumnoList() {
           Siguiente
         </button>
       </div>
-      
+      <div>
+        <h2 className="w-full text-lg font-semibold mb-2 mt-2 font-black">Eventos <span
+
+          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={() => handleNavigation('/ficha/addferiado')}
+        >
+          <GrUserAdd className='m-2'/>
+
+        </span></h2>
+        <ul className="space-y-2">
+          {eventosMostrados.map(evento => (
+            <li key={evento.id} className="p-3 bg-white shadow rounded flex items-center">
+              <span className="text-2xl mr-3">{iconos[evento.categoria]}</span>
+              <div>
+                <p className="font-semibold">{evento.nombre}</p>
+                <p className="text-gray-500 text-sm">{evento.fecha}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {eventosFiltrados.length > 10 && (
+          <button
+          onClick={() => setMostrarTodos(!mostrarTodos)}
+          className="mt-4 p-2 bg-blue-500 text-white rounded w-full"
+          >
+            {mostrarTodos ? "Mostrar menos" : "Mostrar más"}
+          </button>
+        )}
+      </div>
+
     </div>
   )
 }
