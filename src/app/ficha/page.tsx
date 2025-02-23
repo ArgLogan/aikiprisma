@@ -104,7 +104,7 @@ export default function AlumnoList() {
   }).length;
 
   const asitenciaDetalle = calculaCantDias(['Martes','Jueves','Sabado'],selectedAlumno.fechaGradActual,new Date());
-
+  setFiltro("")
   return (
     <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
