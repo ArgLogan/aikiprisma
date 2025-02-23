@@ -57,9 +57,9 @@ export default function AlumnoForm() {
       alert(`Hubo un problema con la solicitud: ${error}`);
     }
   };
-  const handleNavigation = (route: string) => {
-    router.push(route)
-  }
+  //const handleNavigation = (route: string) => {
+    //router.push(route)
+  //}
 
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
