@@ -43,6 +43,7 @@ export default function AlumnoList() {
         setAlumnos(data)
       } catch (error) {
         console.error('Error fetching alumnos:', error)
+        setAlumnos([{ id: 0, nombre: 'Error', apellido: 'Error', fechaNacimiento: 'Error', fechaInicio: 'Error', graduacionActual: 'Error', fechaGradActual: 'Error', email: 'Error', passwordHash: 'Error', foto: '/uploads/GenericoM.png', asistencia: [] }])
       }
     }
     fetchAlumnos()

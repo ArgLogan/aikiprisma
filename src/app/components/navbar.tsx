@@ -17,7 +17,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-semibold">
+            <Link href="/" className="text-xl font-semibold" onClick={closeMenu}>
               Home
             </Link>
           </div>
@@ -30,6 +30,9 @@ export default function Navbar() {
             </Link>
             <Link href="/feriados" className="hover:bg-blue-700 px-3 py-2 rounded">
               Feriados
+            </Link>
+            <Link href="/eventos" className="hover:bg-blue-700 px-3 py-2 rounded">
+              Eventos
             </Link>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -60,9 +63,9 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link href="/" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
+            {/* <Link href="/" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Home
-            </Link>
+            </Link> */}
             <Link href="/ficha" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Alumnos
             </Link>
@@ -71,6 +74,9 @@ export default function Navbar() {
             </Link>
             <Link href="/feriados" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Feriados
+            </Link>
+            <Link href="/eventos" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
+              Eventos
             </Link>
           </div>
         </div>
