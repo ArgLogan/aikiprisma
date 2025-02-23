@@ -43,7 +43,7 @@ export default function AlumnoList() {
   const router = useRouter()
   const [alumnos, setAlumnos] = useState<Alumno[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [filtro, setFiltro] = useState("");
+  //const [filtro, setFiltro] = useState("");
   const [mostrarTodos, setMostrarTodos] = useState(false);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export default function AlumnoList() {
 
   const selectedAlumno = alumnos[currentIndex]
   const eventosFiltrados = selectedAlumno.Eventos
-    .filter(e => (filtro ? e.categoria === filtro : true))
+    //.filter(e => (filtro ? e.categoria === filtro : true))
     .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
 
   const eventosMostrados = mostrarTodos ? eventosFiltrados : eventosFiltrados.slice(0, 10);
@@ -104,7 +104,7 @@ export default function AlumnoList() {
   }).length;
 
   const asitenciaDetalle = calculaCantDias(['Martes','Jueves','Sabado'],selectedAlumno.fechaGradActual,new Date());
-  setFiltro("")
+  //setFiltro("")
   return (
     <div {...swipeHandlers} className="h-screen flex flex-col items-center justify-center">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
@@ -176,12 +176,12 @@ export default function AlumnoList() {
         </button>
       </div>
       <div>
-        <h2 className="w-full text-lg font-semibold mb-2 mt-2 font-black">Eventos <span
+        <h2 className="w-full text-lg font-semibold mb-2 mt-2 text-black">Eventos <span
 
           className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
           onClick={() => handleNavigation('/ficha/addferiado')}
         >
-          <GrUserAdd className='m-2'/>
+          <GrUserAdd className='m-1'/>
 
         </span></h2>
         <ul className="space-y-2">
