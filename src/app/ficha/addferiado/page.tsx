@@ -1,4 +1,8 @@
 'use client'
+
+export default function AddFeriado() {
+   return(<div></div>)
+}
 //import { useState, useEffect } from 'react';
 //import { useRouter } from 'next/navigation';
 //import { formatearFecha } from '../../funcs/funciones'; 
