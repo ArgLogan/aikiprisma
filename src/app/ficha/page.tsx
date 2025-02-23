@@ -151,6 +151,7 @@ export default function AlumnoList() {
           Siguiente
         </button>
       </div>
+      
     </div>
   )
 }

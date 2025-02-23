@@ -72,11 +72,42 @@ export default function ListaEventos() {
 
   return (
     <div className="p-4 bg-gray-100 rounded-md">
-      <h2 className="text-lg font-semibold mb-2">Eventos</h2>
-      <div className="mb-4">
-        <label className="block mb-1">Filtrar por tipo:</label>
+      <h3 className="text-lg font-semibold mt-6 font-black">Agregar Evento</h3>
+      <form onSubmit={handleAddEvento} className="space-y-2 mb-3">
+        <input
+          type="text"
+          placeholder="Nombre del evento"
+          className="border p-2 rounded w-full"
+          value={nuevoEvento.nombre}
+          onChange={(e) => setNuevoEvento({ ...nuevoEvento, nombre: e.target.value })}
+          required
+        />
+        <input
+          type="date"
+          className="border p-2 rounded w-full"
+          value={nuevoEvento.fecha}
+          onChange={(e) => setNuevoEvento({ ...nuevoEvento, fecha: e.target.value })}
+          required
+        />
         <select
           className="border p-2 rounded w-full"
+          value={nuevoEvento.categoria}
+          onChange={(e) => setNuevoEvento({ ...nuevoEvento, categoria: e.target.value })}
+          required
+        >
+          <option value="">Seleccione tipo</option>
+          <option value="CS">Clase Especial</option>
+          <option value="CD">Clase de Danes</option>
+          <option value="SN">Seminario Nacional</option>
+          <option value="SI">Seminario Internacional</option>
+        </select>
+        <button type="submit" className="p-2 bg-green-500 text-white rounded w-full">Agregar Evento</button>
+      </form>
+      <h2 className="text-lg font-semibold mb-2 mt-2 font-black">Eventos</h2>
+      <div className="mb-4">
+        <label className="block mb-1 font-black">Filtrar por tipo:</label>
+        <select
+          className="border p-2 rounded w-full font-black"
           onChange={e => setFiltro(e.target.value)}
           value={filtro}
         >
@@ -107,37 +138,6 @@ export default function ListaEventos() {
         </button>
       )}
 
-      <h3 className="text-lg font-semibold mt-6">Agregar Evento</h3>
-      <form onSubmit={handleAddEvento} className="space-y-2">
-        <input
-          type="text"
-          placeholder="Nombre del evento"
-          className="border p-2 rounded w-full"
-          value={nuevoEvento.nombre}
-          onChange={(e) => setNuevoEvento({ ...nuevoEvento, nombre: e.target.value })}
-          required
-        />
-        <input
-          type="date"
-          className="border p-2 rounded w-full"
-          value={nuevoEvento.fecha}
-          onChange={(e) => setNuevoEvento({ ...nuevoEvento, fecha: e.target.value })}
-          required
-        />
-        <select
-          className="border p-2 rounded w-full"
-          value={nuevoEvento.categoria}
-          onChange={(e) => setNuevoEvento({ ...nuevoEvento, categoria: e.target.value })}
-          required
-        >
-          <option value="">Seleccione tipo</option>
-          <option value="CS">Clase Especial</option>
-          <option value="CD">Clase de Danes</option>
-          <option value="SN">Seminario Nacional</option>
-          <option value="SI">Seminario Internacional</option>
-        </select>
-        <button type="submit" className="p-2 bg-green-500 text-white rounded w-full">Agregar Evento</button>
-      </form>
     </div>
   );
 }

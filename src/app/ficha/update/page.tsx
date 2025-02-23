@@ -132,7 +132,8 @@ export default function ActualizarAlumnoForm() {
           <button 
             type='button'
             className=" p-2 bg-red-500 text-white rounded hover:bg-red-600"
-            onClick={() => handleNavigation('/ficha')}
+            //onClick={() => handleNavigation('/ficha')}
+            onClick={router.back}
           >
             Cancelar
           </button>
