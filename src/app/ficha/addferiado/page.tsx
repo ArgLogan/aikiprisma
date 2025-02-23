@@ -1,13 +1,13 @@
 'use client'
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { formatearFecha } from '../../funcs/funciones'; 
+//import { useState, useEffect } from 'react';
+//import { useRouter } from 'next/navigation';
+//import { formatearFecha } from '../../funcs/funciones'; 
 
-interface Evento {
-    id: number;
-    fecha: string;
-    categoria: string;
-}
+//interface Evento {
+   // id: number;
+   // fecha: string;
+   // categoria: string;
+//}
 // useEffect(() => {
 //     const fetchEventos = async () => {
 //       try {
