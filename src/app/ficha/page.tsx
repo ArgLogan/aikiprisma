@@ -383,7 +383,7 @@ export default function AlumnoList() {
           Siguiente
         </button>
       </div>
-      <div className="flex-1 overflow-y-auto w-full max-w-sm mx-auto mt-4">
+      <div className="flex-1 overflow-y-auto w-full max-w-sm mx-auto mt-4 text-black">
         <div className='flex justify-between items-center w-full'>
           <h2 className="w-full text-lg font-semibold m-2 text-black">Eventos</h2>
           <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -396,11 +396,11 @@ export default function AlumnoList() {
         </div>
         <ul className="space-y-2">
           {eventosMostrados.map(evento => (
-            <li key={evento.id} className="p-3 bg-white shadow rounded flex items-center">
+            <li key={evento.id} className="p-3 bg-white shadow rounded flex items-center text-black">
               <span className="text-2xl mr-3">{iconos[evento.categoria]}</span>
               <div>
-                <p className="font-semibold">{evento.nombre}</p>
-                <p className="text-gray-500 text-sm">{formatearFecha(evento.fecha)}</p>
+                <p className="font-semibold text-black">{evento.nombre}</p>
+                <p className="text-black-600 text-sm">{formatearFecha(evento.fecha)}</p>
               </div>
             </li>
           ))}

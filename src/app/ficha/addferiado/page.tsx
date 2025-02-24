@@ -113,10 +113,10 @@ export default function EventosList() {
 
   return (
     <div className={styles.container}>
-      <h2 className="text-2xl font-bold mb-4">Lista de Eventos</h2>
-      <div className="max-h-40 overflow-y-auto space-y-2">
+      <h2 className="text-2xl-black font-bold mb-4">Lista de Eventos</h2>
+      <div className="max-h-40 overflow-y-auto space-y-2 text-black">
         {eventos.map((evento) => (
-          <label key={evento.id} className="flex items-center space-x-2">
+          <label key={evento.id} className="flex items-center space-x-2 text-black">
             <input
               type="checkbox"
               checked={selectedEventos.includes(evento.id)}
@@ -131,13 +131,13 @@ export default function EventosList() {
       </div>
 
       {/* Mostrar los eventos seleccionados (opcional) */}
-      <div className="mt-4">
-        <h3 className="text-lg font-semibold mb-2">Eventos Seleccionados</h3>
+      <div className="mt-4 text-black">
+        <h3 className="text-lg-black font-semibold mb-2">Eventos Seleccionados</h3>
         <ul>
           {selectedEventos.map((id) => {
             const evento = eventos.find((e) => e.id === id);
             return (
-              <li key={id} className="mb-2">
+              <li key={id} className="mb-2 text-black">
                 {evento?.nombre} - {formatearFecha(evento?.fecha)}
               </li>
             );
