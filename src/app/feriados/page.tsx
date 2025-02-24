@@ -87,6 +87,7 @@
 
 import { useState, useEffect } from 'react';
 import { formatearFecha } from '../funcs/funciones';
+import { useRouter } from 'next/navigation'
 
 export default function CrearFeriadoForm() {
   interface Feriado {
@@ -94,6 +95,7 @@ export default function CrearFeriadoForm() {
     fecha: string;
     descripcion: string;
   }
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     fecha: '',
@@ -131,6 +133,7 @@ export default function CrearFeriadoForm() {
       if (response.ok) {
         alert('Feriado creado con éxito');
         setFormData({ fecha: '', descripcion: '' });
+        router.refresh();
         //fetchFeriados(); // Recargar la lista de feriados
       } else {
         alert('Error al crear el feriado');
