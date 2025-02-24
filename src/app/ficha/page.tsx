@@ -45,6 +45,7 @@ export default function AlumnoList() {
   const [alumnos, setAlumnos] = useState<Alumno[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [mostrarTodos, setMostrarTodos] = useState(false);
+  const [feriados, setFeriados] = useState<Evento[]>([]);
 
   useEffect(() => {
     const fetchAlumnos = async () => {
@@ -59,6 +60,19 @@ export default function AlumnoList() {
     }
     fetchAlumnos()
   }, [])
+
+  useEffect(() => {
+    const fetchFeriados = async () => {
+      try {
+        const response = await fetch('/api/feriado/get');
+        const data = await response.json();
+        setFeriados(data);
+      } catch (error) {
+        alert(`Error al cargar la lista de feriados, ${error}`);
+      }
+    };
+    fetchFeriados();
+  }, []);
 
   const iconos = {
     CS: "🔵", // Clase especial
@@ -103,6 +117,7 @@ export default function AlumnoList() {
   }).length;
 
   const asitenciaDetalle = calculaCantDias(['Martes','Jueves','Sábado'],selectedAlumno.fechaGradActual,new Date());
+
   return (
     <div {...swipeHandlers} className="h-screen flex flex-col bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm mx-auto mt-4">
@@ -127,7 +142,7 @@ export default function AlumnoList() {
         </p>
         <h2 className={styles.nombre}>Asistencia</h2>
         <p className={styles.titulo}>
-          <span >Presente:</span> {asistencia} <span>Ausente:</span> {asitenciaDetalle.cantidad-asistencia}  Meses: {asitenciaDetalle.meses}
+          <span >Presente:</span> {asistencia} <span>Ausente:</span> {asitenciaDetalle.cantidad-asistencia-feriados.length}  Meses: {asitenciaDetalle.meses}
         </p>
         <p className={styles.titulo}>
           <span >Email:</span> {selectedAlumno.email}

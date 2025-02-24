@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Feriado {
   id: number;
@@ -11,7 +12,7 @@ interface Feriado {
 export default function BorrarFeriadoForm() {
   const [feriados, setFeriados] = useState<Feriado[]>([]);
   const [selectedFeriadoId, setSelectedFeriadoId] = useState<number | null>(null);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchFeriados = async () => {
       try {
@@ -41,6 +42,7 @@ export default function BorrarFeriadoForm() {
         alert('Feriado eliminado con éxito');
         setFeriados(feriados.filter((feriado) => feriado.id !== selectedFeriadoId));
         setSelectedFeriadoId(null);
+        router.back();
       } else {
         alert('Error al borrar el feriado');
       }
