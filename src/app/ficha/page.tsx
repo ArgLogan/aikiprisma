@@ -400,7 +400,7 @@ export default function AlumnoList() {
               <span className="text-2xl mr-3">{iconos[evento.categoria]}</span>
               <div>
                 <p className="font-semibold">{evento.nombre}</p>
-                <p className="text-gray-500 text-sm">{evento.fecha}</p>
+                <p className="text-gray-500 text-sm">{formatearFecha(evento.fecha)}</p>
               </div>
             </li>
           ))}
