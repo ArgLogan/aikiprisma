@@ -87,7 +87,6 @@ function obtenerColorIcono(fechaNacimiento){
   const hoy = new Date();
   const fechaNac = new Date(fechaNacimiento + "T00:00:00");
   const diferenciaDias = hoy.getDate() - fechaNac.getDate();
-  console.log(`hoy: ${hoy.getDate()}  fechaNac: ${fechaNac.getDate()}  difDias: ${diferenciaDias}`)
 
   if(hoy.getMonth() === fechaNac.getMonth()){
     if (diferenciaDias === 0) {
