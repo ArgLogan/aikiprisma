@@ -83,29 +83,27 @@ function  formatearFecha(fechaOriginal) {
   return fotoEvento
 }
 
-function actualizardatos(){
-  
-  const url = localStorage.getItem("url");
-  fetch(url + '/alumno/ver')
-  .then((response) => response.json())
-  .then((datos) => {
-    // Actualiza el estado de los alumnos con la lista actualizada
-    const lista = datos
-   return lista;
-  })
-  .catch((error) => {
-   console.error('Error al obtener la lista actualizada de alumnos:', error);
- });
+function obtenerColorIcono(fechaNacimiento){
+  const hoy = new Date();
+  const fechaNac = new Date(fechaNacimiento + "T00:00:00");
+  const diferenciaDias = hoy.getDate() - fechaNac.getDate();
+  console.log(`hoy: ${hoy.getDate()}  fechaNac: ${fechaNac.getDate()}  difDias: ${diferenciaDias}`)
 
-}
-/*
-const fechasOrdenadas = fechas
-  .map((fecha) => new Date(fecha)) // Realiza una copia de las fechas para evitar modificar el array original
-  .sort((a, b) => a - b); // Ordena las fechas de forma ascendente
-
-console.log(fechasOrdenadas);
-*/
+  if(hoy.getMonth() === fechaNac.getMonth()){
+    if (diferenciaDias === 0) {
+      return 'verde'; // Día exacto
+    } else if (diferenciaDias > 0 && diferenciaDias <= 7) {
+      return 'amarillo'; // Días anteriores
+    } else if (diferenciaDias < 0 && diferenciaDias >= -7) {
+      return 'rojo'; // Días posteriores 
+    } else {
+      return null; // Fuera del rango
+    }
+  }else{
+    return null; // Fuera del rango
+  }
+};
   
 
 
-  export {formatearFecha, verNroDeAlumno, calculaCantDias, fotoEventos ,actualizardatos}
+  export {formatearFecha, verNroDeAlumno, calculaCantDias, fotoEventos ,obtenerColorIcono}

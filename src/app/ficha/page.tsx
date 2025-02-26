@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { formatearFecha, calculaCantDias } from '../funcs/funciones'; 
+import { formatearFecha, calculaCantDias, obtenerColorIcono } from '../funcs/funciones'; 
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'; 
+import { FaCakeCandles } from "react-icons/fa6";
 import { GrUserAdd } from "react-icons/gr";
 import { MdOutlineSportsKabaddi} from "react-icons/md";
 
@@ -117,7 +118,8 @@ export default function AlumnoList() {
   }).length;
 
   const asitenciaDetalle = calculaCantDias(['Martes','Jueves','Sábado'],selectedAlumno.fechaGradActual,new Date());
-
+  const colorIcono = obtenerColorIcono(selectedAlumno.fechaNacimiento);
+  
   return (
     <div {...swipeHandlers} className="h-screen flex flex-col bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm mx-auto mt-4">
@@ -147,9 +149,20 @@ export default function AlumnoList() {
         <p className={styles.titulo}>
           <span >Email:</span> {selectedAlumno.email}
         </p>
-        <p className={styles.titulo}>
+        {/* <p className={styles.titulo}>
         <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
+        </p> */}
+        <p className={styles.titulo}>
+          <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
         </p>
+        {colorIcono && (
+          <FaCakeCandles
+          style={{
+            color: colorIcono === 'verde' ? 'green' : colorIcono === 'amarillo' ? 'blue' : 'red',
+            marginLeft: '10px',
+          }}
+          />
+        )}
       </div>
       <div className="mt-4 flex justify-between w-full max-w-sm mx-auto">
         <button
