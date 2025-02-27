@@ -34,6 +34,9 @@ export default function Navbar() {
             <Link href="/eventos" className="hover:bg-blue-700 px-3 py-2 rounded">
               Eventos
             </Link>
+            <Link href="/informes" className="hover:bg-blue-700 px-3 py-2 rounded">
+              Informes
+            </Link>
           </div>
           <div className="-mr-2 flex md:hidden">
             <button
@@ -77,6 +80,9 @@ export default function Navbar() {
             </Link>
             <Link href="/eventos" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
               Eventos
+            </Link>
+            <Link href="/informes" className="block px-3 py-2 rounded hover:bg-blue-700" onClick={closeMenu}>
+              Informes
             </Link>
           </div>
         </div>
