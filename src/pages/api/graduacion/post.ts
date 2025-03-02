@@ -18,8 +18,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             tipo,
             fecha,
             dojo,
-            alumno,
+            alumno:{
+              connect: alumno.map((alumno: { id: number }) => ({
+                id: alumno.id
+              }))
+            },
         },
+        include: {
+          alumno: true // Incluimos los presentes en la respuesta
+        }
       });
       res.status(201).json(nuevaGraduacion);
     } catch (error) {

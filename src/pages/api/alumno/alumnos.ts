@@ -1,11 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../lib/prisma';
 
-// const prisma = new PrismaClient({
-//   log: ['info', 'warn', 'error'],
-// });
-
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
@@ -13,7 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         include: {
           asistencia: true,
           Eventos: true,
-          graduaciones: true,
+          graduaciones: {
+            orderBy:{fecha: 'desc'},
+          },
         },
         orderBy: {
           nombre: 'asc', // Ordenar por el campo 'nombre' de manera ascendente

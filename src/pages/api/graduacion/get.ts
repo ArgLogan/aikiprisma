@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const eventos = await prisma.graduacion.findMany({
 
         orderBy: {
-          fecha: 'desc', // Ordenar por el campo 'fecha' de manera descendente
+          fecha: 'asc', // Ordenar por el campo 'fecha' de manera ascendente
         },
       });
 

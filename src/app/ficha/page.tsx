@@ -22,6 +22,18 @@ export default function AlumnoList() {
   const [feriados, setFeriados] = useState<Evento[]>([]);
 
   useEffect(() => {
+    const verificaIndice = () => {
+      const storedIndex = sessionStorage.getItem('currentIndex');
+      if (storedIndex !== null && storedIndex !== '') {
+        setCurrentIndex(parseInt( storedIndex));
+        sessionStorage.setItem('currentIndex', '');
+      }
+    }
+    verificaIndice();
+  }
+  ,[]);
+
+  useEffect(() => {
     const fetchAlumnos = async () => {
       try {
         const response = await fetch('/api/alumno/alumnos')
@@ -182,6 +194,7 @@ export default function AlumnoList() {
             <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
               onClick={() =>{
                 sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
+                sessionStorage.setItem('currentIndex', currentIndex.toString());
                 handleNavigation('/graduacion')
               }}>
               <GiBlackBelt className='m-1' />
@@ -191,9 +204,7 @@ export default function AlumnoList() {
             {selectedAlumno.graduaciones.map(grad => (
               <li key={grad.id} className="p-3 bg-white shadow rounded flex items-center text-black">
                 <div>
-                  <p className="font-semibold text-black">{grad.nivel}</p>
-                  <p className="text-black-600 text-sm">{formatearFecha(grad.fecha)}</p>
-                  <p className="text-black-600 text-sm">{formatearFecha(grad.dojo)}</p>
+                  <p className="font-semibold text-black"> {grad.nivel} - {formatearFecha(grad.fecha)} - {grad.dojo} </p>
                 </div>
               </li>
             ))}
