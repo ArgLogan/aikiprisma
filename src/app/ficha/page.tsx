@@ -13,9 +13,6 @@ import { MdOutlineSportsKabaddi} from "react-icons/md";
 import { GiBlackBelt } from "react-icons/gi";
 import type {Evento, Alumno } from '../funcs/models'
 
-//type EventoTipo = "CS" | "CD" | "SN" | "SI";
-
-
 
 export default function AlumnoList() {
   const router = useRouter()
@@ -32,7 +29,7 @@ export default function AlumnoList() {
         setAlumnos(data)
       } catch (error) {
         console.error('Error fetching alumnos:', error)
-        setAlumnos([{ id: 0, nombre: 'Error', apellido: 'Error', fechaNacimiento: 'Error', fechaInicio: 'Error', graduacionActual: 'Error', fechaGradActual: 'Error', email: 'Error', passwordHash: 'Error', foto: '/uploads/GenericoM.png', asistencia: [], Eventos: [] }])
+        setAlumnos([{ id: 0, nombre: 'Error', apellido: 'Error', fechaNacimiento: 'Error', fechaInicio: 'Error', graduacionActual: 'Error', fechaGradActual: 'Error', email: 'Error', passwordHash: 'Error', foto: '/uploads/GenericoM.png', asistencia: [], Eventos: [], graduaciones: [] }])
       }
     }
     fetchAlumnos()
@@ -97,119 +94,148 @@ export default function AlumnoList() {
   const colorIcono = obtenerColorIcono(selectedAlumno.fechaNacimiento);
   
   return (
-    
-    <div {...swipeHandlers} className="h-screen flex flex-col bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm mx-auto mt-4">
-        <Image
-          className="mb-4 w-32 h-32 rounded-full mx-auto"
-          src={selectedAlumno.foto}
-          alt="Foto del alumno"
-          width={128}
-          height={128}
-        />
-        <h2 className={styles.nombre}>
-          {selectedAlumno.nombre} {selectedAlumno.apellido} 
-        </h2>
-        <p className={styles.titulo}>
-        <span>Fecha de Inicio:</span> {formatearFecha(selectedAlumno.fechaInicio)}
-        </p>
-        <p className={styles.titulo}>
-        <span>Graduación Actual:</span> {selectedAlumno.graduacionActual} 
-        </p>
-        <p className={styles.titulo}>
-        <span> Fecha:</span> {formatearFecha(selectedAlumno.fechaGradActual)}
-        </p>
-        <h2 className={styles.nombre}>Asistencia</h2>
-        <p className={styles.titulo}>
-          <span >Presente:</span> {asistencia} <span>Ausente:</span> {asitenciaDetalle.cantidad-asistencia-feriados.length}  Meses: {asitenciaDetalle.meses}
-        </p>
-        <p className={styles.titulo}>
-          <span >Email:</span> {selectedAlumno.email}
-        </p>
-      
-        <p className={styles.titulo}>
-          <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
-        </p>
-        {colorIcono && (
-          <FaCakeCandles
-          style={{
-            color: colorIcono === 'verde' ? 'green' : colorIcono === 'amarillo' ? 'blue' : 'red',
-            marginLeft: '10px',
-          }}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
+      <div {...swipeHandlers} className="bg-gray-200">
+        <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm mx-auto mt-4">
+          <Image
+            className="mb-4 w-32 h-32 rounded-full mx-auto"
+            src={selectedAlumno.foto}
+            alt="Foto del alumno"
+            width={128}
+            height={128}
           />
-        )}
-      </div>
-      <div className="mt-4 flex justify-between w-full max-w-sm mx-auto">
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-          onClick={() => handleSwipe('right')}
-          disabled={currentIndex === 0}
-        >
-          Anterior
-        </button>
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center justify-center"
-          onClick={() => {
-            sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
-            handleNavigation('/ficha/update');
-          }}
-        >
-          <FaPencilAlt className="m-2" /> {/* Ícono de lápiz */}
-        </button>
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={() => handleNavigation('/ficha/crear')}
-        >
-          <GrUserAdd className='m-2'/>
-        </button>
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-          onClick={() => handleNavigation('/ficha/borrar')}
-        >
-          <FaTrashAlt className="m-2"/>
-        </button>
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-          onClick={() => handleSwipe('left')}
-          disabled={currentIndex === alumnos.length - 1}
-        >
-          Siguiente
-        </button>
-      </div>
-      <div className="flex-1 overflow-y-auto w-full max-w-sm mx-auto mt-4 text-black">
-        <div className='flex justify-between items-center w-full'>
-          <h2 className="w-full text-lg font-semibold m-2 text-black">Eventos</h2>
-          <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-            onClick={() =>{
-              sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
-              handleNavigation('/ficha/addferiado')
-            }}>
-            <MdOutlineSportsKabaddi className='m-1' />
+          <h2 className={styles.nombre}>
+            {selectedAlumno.nombre} {selectedAlumno.apellido} 
+          </h2>
+          <p className={styles.titulo}>
+          <span>Fecha de Inicio:</span> {formatearFecha(selectedAlumno.fechaInicio)}
+          </p>
+          <p className={styles.titulo}>
+          <span>Graduación Actual:</span> {selectedAlumno.graduacionActual} 
+          </p>
+          <p className={styles.titulo}>
+          <span> Fecha:</span> {formatearFecha(selectedAlumno.fechaGradActual)}
+          </p>
+          <h2 className={styles.nombre}>Asistencia</h2>
+          <p className={styles.titulo}>
+            <span >Presente:</span> {asistencia} <span>Ausente:</span> {asitenciaDetalle.cantidad-asistencia-feriados.length}  Meses: {asitenciaDetalle.meses}
+          </p>
+          <p className={styles.titulo}>
+            <span >Email:</span> {selectedAlumno.email}
+          </p>
+        
+          <p className={styles.titulo}>
+            <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
+          </p>
+          {colorIcono && (
+            <FaCakeCandles
+            style={{
+              color: colorIcono === 'verde' ? 'green' : colorIcono === 'amarillo' ? 'blue' : 'red',
+              marginLeft: '10px',
+            }}
+            />
+          )}
+        </div>
+        <div className="mt-4 flex justify-between w-full max-w-sm mx-auto">
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            onClick={() => handleSwipe('right')}
+            disabled={currentIndex === 0}
+          >
+            Anterior
           </button>
-          <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-            <GiBlackBelt className='m-1' />
+          <button
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center justify-center"
+            onClick={() => {
+              sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
+              handleNavigation('/ficha/update');
+            }}
+          >
+            <FaPencilAlt className="m-2" /> {/* Ícono de lápiz */}
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={() => handleNavigation('/ficha/crear')}
+          >
+            <GrUserAdd className='m-2'/>
+          </button>
+          <button
+            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+            onClick={() => handleNavigation('/ficha/borrar')}
+          >
+            <FaTrashAlt className="m-2"/>
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            onClick={() => handleSwipe('left')}
+            disabled={currentIndex === alumnos.length - 1}
+          >
+            Siguiente
           </button>
         </div>
-        <ul className="space-y-2">
-          {eventosMostrados.map(evento => (
-            <li key={evento.id} className="p-3 bg-white shadow rounded flex items-center text-black">
-              <span className="text-2xl mr-3">{iconos[evento.categoria]}</span>
-              <div>
-                <p className="font-semibold text-black">{evento.nombre}</p>
-                <p className="text-black-600 text-sm">{formatearFecha(evento.fecha)}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        {eventosFiltrados.length > 10 && (
-          <button
-          onClick={() => setMostrarTodos(!mostrarTodos)}
-          className="mt-4 p-2 bg-blue-500 text-white rounded w-full"
-          >
-            {mostrarTodos ? "Mostrar menos" : "Mostrar más"}
-          </button>
-        )}
       </div>
+{/*-----------------GRADUACIONES----------------------------- */}
+      <section  className="bg-gray-200 p-4" >
+        <div className="flex-1 overflow-y-auto w-full max-w-sm mx-auto mt-4 text-black">
+          <div className='flex justify-between items-center w-full'>
+            <h2 className="w-full text-lg font-semibold m-2 text-black">Graduaciones</h2>
+            <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() =>{
+                sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
+                handleNavigation('/graduacion')
+              }}>
+              <GiBlackBelt className='m-1' />
+            </button>
+          </div>
+          <ul className="space-y-2">
+            {selectedAlumno.graduaciones.map(grad => (
+              <li key={grad.id} className="p-3 bg-white shadow rounded flex items-center text-black">
+                <div>
+                  <p className="font-semibold text-black">{grad.nivel}</p>
+                  <p className="text-black-600 text-sm">{formatearFecha(grad.fecha)}</p>
+                  <p className="text-black-600 text-sm">{formatearFecha(grad.dojo)}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+{/*-----------------EVENTOS----------------------------- */}
+      <section className="bg-gray-200 p-4">
+
+        <div className="flex-1 overflow-y-auto w-full max-w-sm mx-auto mt-4 text-black">
+          <div className='flex justify-between items-center w-full'>
+            <h2 className="w-full text-lg font-semibold m-2 text-black">Eventos</h2>
+            <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() =>{
+                sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
+                handleNavigation('/ficha/addferiado')
+              }}>
+              <MdOutlineSportsKabaddi className='m-1' />
+            </button>
+          </div>
+          <ul className="space-y-2">
+            {eventosMostrados.map(evento => (
+              <li key={evento.id} className="p-3 bg-white shadow rounded flex items-center text-black">
+                <span className="text-2xl mr-3">{iconos[evento.categoria]}</span>
+                <div>
+                  <p className="font-semibold text-black">{evento.nombre}</p>
+                  <p className="text-black-600 text-sm">{formatearFecha(evento.fecha)}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          {eventosFiltrados.length > 10 && (
+            <button
+            onClick={() => setMostrarTodos(!mostrarTodos)}
+            className="mt-4 p-2 bg-blue-500 text-white rounded w-full"
+            >
+              {mostrarTodos ? "Mostrar menos" : "Mostrar más"}
+            </button>
+          )}
+        </div>
+      </section>
+
     </div>
   )
 }
