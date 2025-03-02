@@ -1,7 +1,6 @@
 
 'use client';
 import { useState, useEffect } from 'react';
-import styles from '../../ui/ficha.module.css';
 import { formatearFecha } from '../../funcs/funciones';
 
 interface Evento {
