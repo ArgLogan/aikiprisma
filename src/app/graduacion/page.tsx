@@ -1,11 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 import type { Alumno } from '../funcs/models';
 
 export default function GraduacionList() {
 
-    const router = useRouter();
+    //const router = useRouter();
     const [formData, setFormData] = useState({
         fecha: '',
         instructor: '',
