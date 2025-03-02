@@ -160,6 +160,7 @@ export default function AlumnoList() {
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center justify-center"
             onClick={() => {
               sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
+              sessionStorage.setItem('currentIndex', currentIndex.toString());
               handleNavigation('/ficha/update');
             }}
           >
