@@ -1,45 +1,21 @@
 
 'use client'
 import styles from '../ui/ficha.module.css'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 import { formatearFecha, calculaCantDias, obtenerColorIcono } from '../funcs/funciones'; 
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'; 
 import { FaCakeCandles } from "react-icons/fa6";
 import { GrUserAdd } from "react-icons/gr";
 import { MdOutlineSportsKabaddi} from "react-icons/md";
+import { GiBlackBelt } from "react-icons/gi";
+import type {Evento, Alumno } from '../funcs/models'
 
-type EventoTipo = "CS" | "CD" | "SN" | "SI";
+//type EventoTipo = "CS" | "CD" | "SN" | "SI";
 
-interface Asistencia {
-  id: number
-  fecha: string
-  instructor: string
-  tipo: string
-}
-interface Evento {
-  id: number
-  nombre: string
-  categoria: EventoTipo
-  fecha: string
-}
 
-interface Alumno {
-  id: number
-  nombre: string
-  apellido: string
-  fechaNacimiento: string
-  fechaInicio: string
-  graduacionActual: string
-  fechaGradActual: string
-  email: string
-  passwordHash: string
-  foto: string
-  asistencia: Asistencia[]
-  Eventos: Evento[]
-}
 
 export default function AlumnoList() {
   const router = useRouter()
@@ -121,6 +97,7 @@ export default function AlumnoList() {
   const colorIcono = obtenerColorIcono(selectedAlumno.fechaNacimiento);
   
   return (
+    
     <div {...swipeHandlers} className="h-screen flex flex-col bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm mx-auto mt-4">
         <Image
@@ -149,9 +126,7 @@ export default function AlumnoList() {
         <p className={styles.titulo}>
           <span >Email:</span> {selectedAlumno.email}
         </p>
-        {/* <p className={styles.titulo}>
-        <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
-        </p> */}
+      
         <p className={styles.titulo}>
           <span>Fecha de Nacimiento:</span> {formatearFecha(selectedAlumno.fechaNacimiento)}
         </p>
@@ -210,6 +185,9 @@ export default function AlumnoList() {
               handleNavigation('/ficha/addferiado')
             }}>
             <MdOutlineSportsKabaddi className='m-1' />
+          </button>
+          <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+            <GiBlackBelt className='m-1' />
           </button>
         </div>
         <ul className="space-y-2">
