@@ -4,23 +4,27 @@ import { prisma } from '../../../lib/prisma';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const {
-        nombre,
-        fecha,
-        categoria,
+      nivel,
+      tipo,
+      fecha,
+      dojo,
+      alumno,
     } = req.body;
     
     try {
-      const nuevoAlumno = await prisma.evento.create({
+      const nuevaGraduacion = await prisma.graduacion.create({
         data: {
-            nombre,
+            nivel,
+            tipo,
             fecha,
-            categoria,
+            dojo,
+            alumno,
         },
       });
-      res.status(201).json(nuevoAlumno);
+      res.status(201).json(nuevaGraduacion);
     } catch (error) {
-      console.error('Error al crear el evento:', error);
-      res.status(500).json({ error: 'Error al crear el evento' });
+      console.error('Error al crear la graduación:', error);
+      res.status(500).json({ error: 'Error al crear la graduación' });
     }
   } else {
     res.setHeader('Allow', ['POST']);
