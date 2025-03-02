@@ -112,40 +112,42 @@ export default function EventosList() {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className="text-2xl-black font-bold mb-4">Lista de Eventos</h2>
-      <div className="max-h-40 overflow-y-auto space-y-2 text-black">
-        {eventos.map((evento) => (
-          <label key={evento.id} className="flex items-center space-x-2 text-black">
-            <input
-              type="checkbox"
-              checked={selectedEventos.includes(evento.id)}
-              onChange={() => handleCheckboxChange(evento.id)}
-              className="w-4 h-4"
-            />
-            <span>
-              ({evento.categoria}) - {formatearFecha(evento.fecha)} - {evento.nombre}
-            </span>
-          </label>
-        ))}
-      </div>
+    <div className="bg-gray-200 w-full h-fit">
+      <h2 className="text-2xl-black font-bold mb-4 w-3/4 text-center">Lista de Eventos</h2>
+      <section className='grid grid-cols-1 md:grid-cols-2 gap-4 h-full'>
+        <div className=" mx-1 px-1 max-h-80 overflow-y-auto space-y-2 text-black">
+          {eventos.map((evento) => (
+            <label key={evento.id} className="flex items-center space-x-2 text-black">
+              <input
+                type="checkbox"
+                checked={selectedEventos.includes(evento.id)}
+                onChange={() => handleCheckboxChange(evento.id)}
+                className=" mx-4 w-4 h-4"
+                />
+              <span>
+                ({evento.categoria}) - {formatearFecha(evento.fecha)} - {evento.nombre}
+              </span>
+            </label>
+          ))}
+        </div>
 
-      {/* Mostrar los eventos seleccionados (opcional) */}
-      <div className="mt-4 text-black">
-        <h3 className="text-lg-black font-semibold mb-2">Eventos Seleccionados</h3>
-        <ul>
-          {selectedEventos.map((id) => {
-            const evento = eventos.find((e) => e.id === id);
-            return (
-              <li key={id} className="mb-2 text-black">
-                {evento?.nombre} - {formatearFecha(evento?.fecha)}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+{/* Mostrar los eventos seleccionados (opcional) */}
 
-      {/* Botón para agregar eventos al alumno */}
+        <div className="mt-4 text-black">
+          <h3 className="text-lg-black font-semibold mb-2">Eventos Seleccionados</h3>
+          <ul>
+            {selectedEventos.map((id) => {
+              const evento = eventos.find((e) => e.id === id);
+              return (
+                <li key={id} className="mb-2 text-black">
+                  {evento?.nombre} - {formatearFecha(evento?.fecha)}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+  {/* Botón para agregar eventos al alumno */}
       <button
         onClick={handleAgregarEventos}
         className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
