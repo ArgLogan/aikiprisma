@@ -1,13 +1,26 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Alumno } from '../funcs/models';
 
 export default function GraduacionList() {
-    const storedAlumno = sessionStorage.getItem('alumno');
-    const alumno: Alumno | null = storedAlumno ? JSON.parse(storedAlumno) : null;
+    // const storedAlumno = sessionStorage.getItem('alumno');
+    // const alumno: Alumno | null = storedAlumno ? JSON.parse(storedAlumno) : null;
+    // const idAlumno = alumno ? alumno.id : null;
+    const [alumno, setAlumno] = useState<Alumno | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") { // Solo se ejecuta en el cliente
+            const storedAlumno = sessionStorage.getItem("alumno");
+            if (storedAlumno) {
+                setAlumno(JSON.parse(storedAlumno));
+            }
+        }
+    }, []);
+
     const idAlumno = alumno ? alumno.id : null;
-    
+
+
     const router = useRouter();
     const [formData, setFormData] = useState({
         nivel:'',
