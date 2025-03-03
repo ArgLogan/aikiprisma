@@ -194,7 +194,7 @@ export default function AlumnoList() {
             <h2 className="w-full text-lg font-semibold m-2 text-black">Graduaciones</h2>
             <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
               onClick={() =>{
-                sessionStorage.setItem('alumno', JSON.stringify(selectedAlumno));
+                sessionStorage.setItem('alumno', selectedAlumno.id.toString());
                 sessionStorage.setItem('currentIndex', currentIndex.toString());
                 handleNavigation('/graduacion')
               }}>

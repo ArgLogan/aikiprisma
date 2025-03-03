@@ -1,41 +1,44 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import type { Alumno } from '../funcs/models';
 
 export default function GraduacionList() {
-    // const storedAlumno = sessionStorage.getItem('alumno');
-    // const alumno: Alumno | null = storedAlumno ? JSON.parse(storedAlumno) : null;
-    // const idAlumno = alumno ? alumno.id : null;
-    const [alumno, setAlumno] = useState<Alumno | null>(null);
 
     useEffect(() => {
-        if (typeof window !== "undefined") { // Solo se ejecuta en el cliente
-            const storedAlumno = sessionStorage.getItem("alumno");
-            if (storedAlumno) {
-                setAlumno(JSON.parse(storedAlumno));
+        const alumnoIdloader = ()=>{
+            const storedAlumnoId =sessionStorage.getItem("alumno");
+            if( storedAlumnoId !== null && storedAlumnoId !== ''){
+                setFormData({
+                    nivel:'',
+                    tipo:'',
+                    fecha: '',
+                    dojo: '',
+                    alumno: [{id: parseInt(storedAlumnoId)}]  ,
+                })
             }
         }
+        alumnoIdloader();
     }, []);
-
-    const idAlumno = alumno ? alumno.id : null;
 
 
     const router = useRouter();
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState(
+        {
         nivel:'',
         tipo:'',
         fecha: '',
         dojo: '',
-        alumno: [{id: idAlumno}],
+        alumno: [{id: 0}]  ,
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        console.log(formData);
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
     
     const handleSubmit = async (e: React.FormEvent) => {
+        console.log(formData);
         e.preventDefault();
         try {
             const response = await fetch('/api/graduacion/post', {
