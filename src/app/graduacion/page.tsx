@@ -1,10 +1,9 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Alumno } from '../funcs/models';
 
 export default function GraduacionList() {
-
     const storedAlumno = sessionStorage.getItem('alumno');
     const alumno: Alumno | null = storedAlumno ? JSON.parse(storedAlumno) : null;
     const idAlumno = alumno ? alumno.id : null;
