@@ -10,6 +10,7 @@ export default function Eventos() {
   const [eventos, setEventos] = useState<Evento[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null); // Estado para la fecha seleccionada
   const [filteredClases, setFilteredClases] = useState<Evento[]>([]); // Estado para las clases filtradas por fecha
+  const [nombreEvento, setNombreEvento] = useState<string>('')
 
   // Obtener las clases al cargar el componente
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function Eventos() {
         );
       });
       setFilteredClases(filtered);
+      setNombreEvento(filtered[0]?.nombre || '')
     } else {
       setFilteredClases([]); // Si no hay fecha seleccionada, no mostrar nada
     }
@@ -79,7 +81,7 @@ export default function Eventos() {
               {formatSelectedDate(selectedDate)} -
             </span>
             <span className="text-lg font-semibold">
-               - {filteredClases[0].nombre}
+               - {nombreEvento}
             </span>
           </div>
         )}
