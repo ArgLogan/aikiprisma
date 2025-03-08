@@ -65,6 +65,7 @@ export default function Clases() {
         <div>
           <h2 className="text-lg font-semibold mb-2">Selecciona una fecha</h2>
           <DatePicker
+            showIcon
             selected={selectedDate}
             onChange={(date: Date | null) => setSelectedDate(date)}
             dateFormat="dd/MM/yyyy" // Formato de la fecha
