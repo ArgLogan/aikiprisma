@@ -7,7 +7,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'GET') {
     try {
       const eventos = await prisma.evento.findMany({
-
+        include:{
+          presentes: {
+            select: {
+              nombre: true,
+              apellido: true,
+              foto: true,
+            },
+            orderBy: {
+              nombre: 'asc', // Ordenar los presentes por nombre en orden ascendente
+            },
+          },
+        },
         orderBy: {
           fecha: 'desc', // Ordenar por el campo 'nombre' de manera ascendente
         },

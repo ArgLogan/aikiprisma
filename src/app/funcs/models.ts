@@ -12,6 +12,7 @@ export type Asistencia ={
     nombre:     string
     categoria:  EventoTipo
     fecha:      string
+    presentes:  Alumno[]
   }
   export type Graduacion = {
     id:     number
