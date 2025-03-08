@@ -7,7 +7,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'GET') {
     try {
       const clases = await prisma.clase.findMany({
-        include: { presentes: { select: { nombre: true , apellido: true } } },
+        include: {
+          presentes: {
+            select: {
+              nombre: true,
+              apellido: true,
+              foto: true,
+            },
+            orderBy: {
+              nombre: 'asc', // Ordenar los presentes por nombre en orden ascendente
+            },
+          },
+        }
       });
       res.status(200).json(clases);
     } catch (error) {

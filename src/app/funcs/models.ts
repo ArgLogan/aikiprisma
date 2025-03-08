@@ -5,6 +5,7 @@ export type Asistencia ={
     fecha:      string
     instructor: string
     tipo:       string
+    presentes:  Alumno[]
   }
   export type Evento = {
     id:         number

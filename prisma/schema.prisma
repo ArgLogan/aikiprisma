@@ -16,9 +16,6 @@ model Alumno {
   graduacionActual String
   fechaGradActual  String
   email            String
-  //telefono         String
-  //direccion        String
-  //dni              String
   passwordHash     String
   foto             String
   asistencia       Clase[]      @relation("AlumnoToClase")
