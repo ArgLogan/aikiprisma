@@ -17,6 +17,7 @@ export default function Eventos() {
         const data = await response.json();
         setEventos(data);
         setSelectedDate(null)
+        formatSelectedDate(null)
       } catch (error) {
         console.error('Error fetching eventos:', error);
         alert(`Error fetching eventos, ${error}`);
@@ -42,7 +43,7 @@ export default function Eventos() {
     }
   }, [selectedDate, eventos]);
   
-  formatSelectedDate(null)
+  
   // Función para formatear la fecha seleccionada
   const formatSelectedDate = (date: Date | null): string => {
     if (!date) return ""; // Si no hay fecha seleccionada, devuelve una cadena vacía
