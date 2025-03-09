@@ -16,6 +16,7 @@ export default function Eventos() {
         const response = await fetch('/api/evento/get');
         const data = await response.json();
         setEventos(data);
+        setSelectedDate(null)
       } catch (error) {
         console.error('Error fetching eventos:', error);
         alert(`Error fetching eventos, ${error}`);
@@ -40,7 +41,8 @@ export default function Eventos() {
       setFilteredClases([]); // Si no hay fecha seleccionada, no mostrar nada
     }
   }, [selectedDate, eventos]);
-
+  
+  formatSelectedDate(null)
   // Función para formatear la fecha seleccionada
   const formatSelectedDate = (date: Date | null): string => {
     if (!date) return ""; // Si no hay fecha seleccionada, devuelve una cadena vacía
