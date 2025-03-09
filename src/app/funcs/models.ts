@@ -40,7 +40,7 @@ export type Asistencia ={
   }
 
   export type Feriado = {
-    id: Number,
+    id: number,
     fecha: Date,
     descripcion: string
   }
