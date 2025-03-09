@@ -26,10 +26,12 @@ export default function ListaEventos() {
   const [eventos, setEventos] = useState<Eventos[]>([])
   const router = useRouter();
 
+  const actualYear = new Date().getFullYear()
+  
   useEffect(() => {
       const fetchEventos = async () => {
         try {
-          const response = await fetch('/api/evento/get')
+          const response = await fetch(`/api/evento/get?year=${actualYear}`)
           const data = await response.json()
           setEventos(data)
         } catch (error) {
@@ -37,7 +39,8 @@ export default function ListaEventos() {
         }
       }
       fetchEventos()
-  }, [])
+  }, [actualYear])
+  
   const eventosFiltrados = eventos
     .filter(e => (filtro ? e.categoria === filtro : true))
     .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());

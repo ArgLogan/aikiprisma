@@ -64,8 +64,7 @@ function verNroDeAlumno(listaAlumnos){
 // Devuelve la foto asociada al tipo de evento
   function fotoEventos(evento){
     let fotoEvento = ""
-
-  switch (evento.tipo) {
+  switch (evento.categoria) {
     case 'CD':
       fotoEvento = '/uploads/CD.png';
       break;
