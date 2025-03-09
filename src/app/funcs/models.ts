@@ -38,3 +38,10 @@ export type Asistencia ={
     Eventos: Evento[]
     graduaciones: Graduacion[]
   }
+
+  export type Feriado = {
+    id: Number,
+    fecha: Date,
+    descripcion: string
+  }
+  

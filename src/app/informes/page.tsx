@@ -1,7 +1,12 @@
+'use client' 
+import Image from 'next/image'
 
-// app/informes/page.tsx
 export default function Informes() {
-    return <h1>Página de Informes</h1>;
+    return (
+      <main className='w-full h-full flex items-center justify-center'>
+        <Image src={'/uploads/CDA.jpg' } alt='Shoshin dojo' width={300} height={300}/>
+      </main>
+    );
   }
   
 

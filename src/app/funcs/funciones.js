@@ -1,19 +1,24 @@
 
 function  formatearFecha(fechaOriginal) {
-    // Parsea la fecha original en un objeto Date
-    const fecha = new Date(fechaOriginal + "T00:00:00");
-    // Obtiene el día, mes y año
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 porque los meses van de 0 a 11
-    const año = fecha.getFullYear().toString();
   
-    // Formatea la fecha en dd-mm-yyyy
-    const fechaFormateada = `${dia}-${mes}-${año}`;
-  
-    return fechaFormateada;
+  if (!fechaOriginal.includes("T")) {
+    // Si no lo tiene, lo agrega
+    fechaOriginal += "T00:00:00";
   }
+  // Parsea la fecha original en un objeto Date
+  const fecha = new Date(fechaOriginal);
+  // Obtiene el día, mes y año
+  const dia = fecha.getDate().toString().padStart(2, '0');
+  const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 porque los meses van de 0 a 11
+  const año = fecha.getFullYear().toString();
 
-  function verNroDeAlumno(listaAlumnos){
+  // Formatea la fecha en dd-mm-yyyy
+  const fechaFormateada = `${dia}-${mes}-${año}`;
+
+  return fechaFormateada;
+}
+
+function verNroDeAlumno(listaAlumnos){
     // Encuentra el objeto con el id más alto
     const alumnoConIdMasAlto = listaAlumnos.reduce((maxAlumno, alumno) => {
       return alumno.id > maxAlumno.id ? alumno : maxAlumno;
@@ -29,14 +34,12 @@ function  formatearFecha(fechaOriginal) {
 
   function calculaCantDias(diasEspecificados, fechaInicial, fechaFinal) {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-    //console.log(`dias:${diasEspecificados}  FI: ${fechaInicial}  FF: ${fechaFinal}`)
-
+    
     const fechaInicio = new Date(fechaInicial+ "T00:00:00");
     const fechaInicio2 = new Date(fechaInicial+ "T00:00:00");
-    //const fechaFin = new Date(fechaFinal+ "T00:00:00");
+
     const fechaFin = fechaFinal;
 
-    //console.log(`despues de date FI: ${fechaInicio}  FF: ${fechaFin} `)
     
     let contador = 0;
   

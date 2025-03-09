@@ -43,13 +43,13 @@ model Clase {
 model Evento {
   id        Int      @id @default(autoincrement())
   nombre    String
-  fecha     String
+  fecha     DateTime
   categoria String
   presentes Alumno[] @relation("AlumnoToEvento")
 }
 
 model Feriado {
   id          Int    @id @default(autoincrement())
-  fecha       String
+  fecha       DateTime
   descripcion String
 }

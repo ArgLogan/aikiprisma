@@ -14,8 +14,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const nuevoFeriado = await prisma.feriado.create({
         data: {
-            fecha,
-            descripcion,
+        fecha: new Date(fecha+"T00:00:00z"),
+        descripcion,
         },
       });
       res.status(201).json(nuevoFeriado);

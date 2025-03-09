@@ -3,15 +3,12 @@
 import { useState, useEffect } from "react";
 import AlumnoCard from '../../components/alumno';
 import type { Evento } from "@/app/funcs/models";
-import DatePicker from 'react-datepicker'; // Importa el date picker
-import 'react-datepicker/dist/react-datepicker.css'; // Estilos del date picker
 
 export default function Eventos() {
   const [eventos, setEventos] = useState<Evento[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null); // Estado para la fecha seleccionada
   const [filteredClases, setFilteredClases] = useState<Evento[]>([]); // Estado para las clases filtradas por fecha
-  const [nombreEvento, setNombreEvento] = useState<string>('')
-
+  
   // Obtener las clases al cargar el componente
   useEffect(() => {
     const fetchAsistencia = async () => {
@@ -39,7 +36,6 @@ export default function Eventos() {
         );
       });
       setFilteredClases(filtered);
-      setNombreEvento(filtered[0]?.nombre || '')
     } else {
       setFilteredClases([]); // Si no hay fecha seleccionada, no mostrar nada
     }
@@ -64,28 +60,10 @@ export default function Eventos() {
     <main className="bg-slate-100 w-full h-full overflow-auto p-4">
       {/* Sección 1: Date Picker y leyenda */}
       <section className="mb-4 flex items-center gap-4">
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Selecciona una fecha de Evento</h2>
-          <DatePicker
-            showIcon
-            selected={selectedDate}
-            onChange={(date: Date | null) => setSelectedDate(date)}
-            dateFormat="dd/MM/yyyy" // Formato de la fecha
-            className="p-2 border rounded"
-            placeholderText="Selecciona una fecha"
-          />
-        </div>
-        {/* Leyenda con la fecha formateada */}
-        {selectedDate && (
-          <div className="mt-6">
-            <span className="text-lg font-semibold">
-              {formatSelectedDate(selectedDate)} -
-            </span>
-            <span className="text-lg font-semibold">
-               - {nombreEvento}
-            </span>
-          </div>
-        )}
+        <ul>
+          {}
+        </ul>
+        
       </section>
 
       {/* Sección 2: Lista de presentes */}

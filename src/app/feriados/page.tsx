@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 export default function CrearFeriadoForm() {
   interface Feriado {
     id: number;   
-    fecha: string;
+    fecha: Date;
     descripcion: string;
   }
   const router = useRouter()
