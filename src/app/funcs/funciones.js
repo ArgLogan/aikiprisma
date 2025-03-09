@@ -64,16 +64,16 @@ function  formatearFecha(fechaOriginal) {
 
   switch (evento.tipo) {
     case 'CD':
-      fotoEvento = './imgs/CD.png';
+      fotoEvento = '/uploads/CD.png';
       break;
     case 'SI':
-      fotoEvento = './imgs/SI.png';
+      fotoEvento = '/uploads/SI.png';
       break;
     case 'SN':
-      fotoEvento = './imgs/SN.png';
+      fotoEvento = '/uploads/SN.png';
       break;
     case 'CS':
-      fotoEvento = './imgs/CS.png';
+      fotoEvento = '/uploads/CS.png';
       break;
     default:
       // Valor por defecto si el tipo no coincide con ninguno de los casos anteriores
