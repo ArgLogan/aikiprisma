@@ -12,11 +12,6 @@ export default function Eventos() {
   const [eventos, setEventos] = useState<Evento[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear())
 
-  // Obtener las clases al cargar el componente
-  // useEffect(()=>{
-  //   setSelectedYear(new Date().getFullYear())
-  // },[]);
-
   useEffect(() => {
     const fetchAsistencia = async () => {
       try {
@@ -47,7 +42,7 @@ export default function Eventos() {
     <main className="bg-slate-100 w-full h-full overflow-auto p-4">
 
       <section className="grid grid-cols-2 gap-4 mb-4 bg-gray-300">
-        <h1 className="text-3xl font-bold">Seleccione el año</h1>
+        <h1 className="text-2xl font-bold">Seleccione el año</h1>
         <DatePicker
           selected={new Date(selectedYear,0,1)}
           onChange={handleYearChange}
@@ -60,17 +55,19 @@ export default function Eventos() {
         />
       </section>
       <section className="mb-4 flex items-center gap-4">
-        <ul>
+        <ul className="bg-blue-100 border-2 rounded-md">
           {eventos.map((evento,idx)=>(
-            <li key={idx} className="grid grid-cols-2 gap-2">
-              <Image className="rounded-xl row-span-2"
-                src={fotoEventos(evento)}
-                alt={evento.categoria}
-                height={40}
-                width={40}
-              />
-              <h1 className="text-lg font-semibold">{formatearFecha(evento.fecha)}</h1>
-              <h1 className="text-lg font-semibold">{evento.nombre}</h1>  
+            <li key={idx} >
+              <div className="bg-gray-100 grid grid-cols-2 gap-2 p-2 border rounded-md border-black ">
+                <Image className="rounded-xl row-span-2 "
+                  src={fotoEventos(evento)}
+                  alt={evento.categoria}
+                  height={40}
+                  width={40}
+                  />
+                <h1 className="text-lg font-semibold">{formatearFecha(evento.fecha)}</h1>
+                <h1 className="text-lg font-semibold">{evento.nombre}</h1>  
+              </div>
             </li>
           ))}
         </ul>
